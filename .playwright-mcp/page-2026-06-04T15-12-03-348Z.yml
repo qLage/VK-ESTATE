@@ -1,0 +1,570 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e6]:
+      - link "Ваша Крыша" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "Ваша Крыша" [ref=e8]
+      - button [ref=e9] [cursor=pointer]:
+        - img [ref=e10]
+  - generic [ref=e15]:
+    - paragraph [ref=e18]: Агентство недвижимости
+    - heading "Найдём вашу идеальную крышу" [level=1] [ref=e19]:
+      - text: Найдём вашу
+      - text: идеальную крышу
+    - paragraph [ref=e20]: Продажа и аренда недвижимости в Воронеже и области. Персональный подход, профессиональное сопровождение сделок и юридическая поддержка.
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - img [ref=e24]
+        - textbox "Район, метро или адрес..." [ref=e27]
+      - link [ref=e28] [cursor=pointer]:
+        - /url: /catalog
+        - button [ref=e29]:
+          - img
+    - generic [ref=e30]:
+      - link "Квартиры" [ref=e31] [cursor=pointer]:
+        - /url: /catalog?category=apartment_sell
+      - link "Новостройки" [ref=e32] [cursor=pointer]:
+        - /url: /catalog?category=newbuilding
+      - link "Коттеджи" [ref=e33] [cursor=pointer]:
+        - /url: /catalog?category=house
+      - link "Коммерция" [ref=e34] [cursor=pointer]:
+        - /url: /catalog?category=commercial
+      - link "Ипотека" [ref=e35] [cursor=pointer]:
+        - /url: /catalog?category=apartment_sell
+  - generic [ref=e38]:
+    - generic [ref=e40]:
+      - paragraph [ref=e43]: О нас в цифрах
+      - heading "Почему выбирают нас" [level=2] [ref=e45]
+    - generic [ref=e46]:
+      - generic [ref=e49]:
+        - img [ref=e51]
+        - generic [ref=e55]:
+          - paragraph [ref=e56]:
+            - generic [ref=e57]: 0+
+          - paragraph [ref=e58]: Успешных сделок
+        - paragraph [ref=e59]: Продажа и аренда объектов
+      - generic [ref=e62]:
+        - img [ref=e64]
+        - generic [ref=e69]:
+          - paragraph [ref=e70]:
+            - generic [ref=e71]: 0+
+          - paragraph [ref=e72]: Довольных клиентов
+        - paragraph [ref=e73]: Ежегодно обращаются повторно
+      - generic [ref=e76]:
+        - img [ref=e78]
+        - generic [ref=e81]:
+          - paragraph [ref=e82]:
+            - generic [ref=e83]: 0 года
+          - paragraph [ref=e84]: На рынке
+        - paragraph [ref=e85]: С 2023 года в недвижимости
+      - generic [ref=e88]:
+        - img [ref=e90]
+        - generic [ref=e93]:
+          - paragraph [ref=e94]:
+            - generic [ref=e95]: 0/7
+          - paragraph [ref=e96]: Поддержка
+        - paragraph [ref=e97]: На связи в любое время
+  - generic [ref=e100]:
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - paragraph [ref=e105]: Каталог
+        - heading "Эксклюзивные объекты недвижимости" [level=2] [ref=e106]:
+          - text: Эксклюзивные
+          - text: объекты недвижимости
+      - link "Все объекты" [ref=e107] [cursor=pointer]:
+        - /url: /catalog
+        - button "Все объекты" [ref=e108]:
+          - text: Все объекты
+          - img
+    - generic [ref=e109]:
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - img "1, 50.00 м²" [ref=e113]
+          - generic [ref=e116]: Квартира
+          - button [ref=e117] [cursor=pointer]:
+            - img [ref=e118]
+          - generic [ref=e120]:
+            - paragraph [ref=e121]: 6 100 000 ₽
+            - paragraph [ref=e122]: 122 000 ₽/м²
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - img [ref=e125]
+            - paragraph [ref=e128]: бульвар Победы, 50А
+          - heading "1, 50.00 м²" [level=3] [ref=e129]
+          - generic [ref=e130]:
+            - generic [ref=e131]:
+              - img [ref=e132]
+              - generic [ref=e137]: 50.00 м²
+              - generic [ref=e138]: Площадь
+            - generic [ref=e139]:
+              - img [ref=e140]
+              - generic [ref=e143]: "1"
+              - generic [ref=e144]: Комнаты
+            - generic [ref=e145]:
+              - img [ref=e146]
+              - generic [ref=e149]: 6/17
+              - generic [ref=e150]: Этаж
+      - generic [ref=e152]:
+        - generic [ref=e153]:
+          - img "4, 215.00 м²" [ref=e154]
+          - generic [ref=e157]: Дом
+          - button [ref=e158] [cursor=pointer]:
+            - img [ref=e159]
+          - generic [ref=e161]:
+            - paragraph [ref=e162]: 14 000 000 ₽
+            - paragraph [ref=e163]: 65 116 ₽/м²
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - img [ref=e166]
+            - paragraph [ref=e169]: улица Маршала Голикова, 1
+          - heading "4, 215.00 м²" [level=3] [ref=e170]
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - img [ref=e173]
+              - generic [ref=e178]: 215.00 м²
+              - generic [ref=e179]: Площадь
+            - generic [ref=e180]:
+              - img [ref=e181]
+              - generic [ref=e184]: "4"
+              - generic [ref=e185]: Комнаты
+            - generic [ref=e186]:
+              - img [ref=e187]
+              - generic [ref=e190]: —
+              - generic [ref=e191]: Этаж
+      - generic [ref=e193]:
+        - generic [ref=e194]:
+          - img "4, 74.50 м²" [ref=e195]
+          - generic [ref=e198]: Квартира
+          - button [ref=e199] [cursor=pointer]:
+            - img [ref=e200]
+          - generic [ref=e202]:
+            - paragraph [ref=e203]: 7 000 000 ₽
+            - paragraph [ref=e204]: 93 960 ₽/м²
+        - generic [ref=e205]:
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - paragraph [ref=e210]: улица Хользунова, 3
+          - heading "4, 74.50 м²" [level=3] [ref=e211]
+          - generic [ref=e212]:
+            - generic [ref=e213]:
+              - img [ref=e214]
+              - generic [ref=e219]: 74.50 м²
+              - generic [ref=e220]: Площадь
+            - generic [ref=e221]:
+              - img [ref=e222]
+              - generic [ref=e225]: "4"
+              - generic [ref=e226]: Комнаты
+            - generic [ref=e227]:
+              - img [ref=e228]
+              - generic [ref=e231]: 1/9
+              - generic [ref=e232]: Этаж
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - img "1, 32.00 м²" [ref=e236]
+          - generic [ref=e239]: Квартира
+          - button [ref=e240] [cursor=pointer]:
+            - img [ref=e241]
+          - generic [ref=e243]:
+            - paragraph [ref=e244]: 3 500 000 ₽
+            - paragraph [ref=e245]: 109 375 ₽/м²
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - img [ref=e248]
+            - paragraph [ref=e251]: улица Героев Сибиряков, 97
+          - heading "1, 32.00 м²" [level=3] [ref=e252]
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - img [ref=e255]
+              - generic [ref=e260]: 32.00 м²
+              - generic [ref=e261]: Площадь
+            - generic [ref=e262]:
+              - img [ref=e263]
+              - generic [ref=e266]: "1"
+              - generic [ref=e267]: Комнаты
+            - generic [ref=e268]:
+              - img [ref=e269]
+              - generic [ref=e272]: 4/5
+              - generic [ref=e273]: Этаж
+      - generic [ref=e275]:
+        - generic [ref=e276]:
+          - img "1, 59.80 м²" [ref=e277]
+          - generic [ref=e280]: Квартира
+          - button [ref=e281] [cursor=pointer]:
+            - img [ref=e282]
+          - generic [ref=e284]:
+            - paragraph [ref=e285]: 8 000 000 ₽
+            - paragraph [ref=e286]: 133 779 ₽/м²
+        - generic [ref=e287]:
+          - generic [ref=e288]:
+            - img [ref=e289]
+            - paragraph [ref=e292]: жилой массив Олимпийский, 11
+          - heading "1, 59.80 м²" [level=3] [ref=e293]
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - img [ref=e296]
+              - generic [ref=e301]: 59.80 м²
+              - generic [ref=e302]: Площадь
+            - generic [ref=e303]:
+              - img [ref=e304]
+              - generic [ref=e307]: "1"
+              - generic [ref=e308]: Комнаты
+            - generic [ref=e309]:
+              - img [ref=e310]
+              - generic [ref=e313]: 15/27
+              - generic [ref=e314]: Этаж
+      - generic [ref=e316]:
+        - generic [ref=e317]:
+          - img "2, 71.00 м²" [ref=e318]
+          - generic [ref=e321]: Квартира
+          - button [ref=e322] [cursor=pointer]:
+            - img [ref=e323]
+          - generic [ref=e325]:
+            - paragraph [ref=e326]: 8 500 000 ₽
+            - paragraph [ref=e327]: 119 718 ₽/м²
+        - generic [ref=e328]:
+          - generic [ref=e329]:
+            - img [ref=e330]
+            - paragraph [ref=e333]: улица Владимира Невского, 39Д
+          - heading "2, 71.00 м²" [level=3] [ref=e334]
+          - generic [ref=e335]:
+            - generic [ref=e336]:
+              - img [ref=e337]
+              - generic [ref=e342]: 71.00 м²
+              - generic [ref=e343]: Площадь
+            - generic [ref=e344]:
+              - img [ref=e345]
+              - generic [ref=e348]: "2"
+              - generic [ref=e349]: Комнаты
+            - generic [ref=e350]:
+              - img [ref=e351]
+              - generic [ref=e354]: 1/10
+              - generic [ref=e355]: Этаж
+      - generic [ref=e357]:
+        - generic [ref=e358]:
+          - img "1, 45.90 м²" [ref=e359]
+          - generic [ref=e362]: Квартира
+          - button [ref=e363] [cursor=pointer]:
+            - img [ref=e364]
+          - generic [ref=e366]:
+            - paragraph [ref=e367]: 6 250 000 ₽
+            - paragraph [ref=e368]: 136 166 ₽/м²
+        - generic [ref=e369]:
+          - generic [ref=e370]:
+            - img [ref=e371]
+            - paragraph [ref=e374]: улица Академика Конопатова, 11/1
+          - heading "1, 45.90 м²" [level=3] [ref=e375]
+          - generic [ref=e376]:
+            - generic [ref=e377]:
+              - img [ref=e378]
+              - generic [ref=e383]: 45.90 м²
+              - generic [ref=e384]: Площадь
+            - generic [ref=e385]:
+              - img [ref=e386]
+              - generic [ref=e389]: "1"
+              - generic [ref=e390]: Комнаты
+            - generic [ref=e391]:
+              - img [ref=e392]
+              - generic [ref=e395]: 12/16
+              - generic [ref=e396]: Этаж
+      - generic [ref=e398]:
+        - generic [ref=e399]:
+          - img "1, 42.00 м²" [ref=e400]
+          - generic [ref=e403]: Квартира
+          - button [ref=e404] [cursor=pointer]:
+            - img [ref=e405]
+          - generic [ref=e407]:
+            - paragraph [ref=e408]: 8 700 000 ₽
+            - paragraph [ref=e409]: 207 143 ₽/м²
+        - generic [ref=e410]:
+          - generic [ref=e411]:
+            - img [ref=e412]
+            - paragraph [ref=e415]: Средне-Московская улица, 62А
+          - heading "1, 42.00 м²" [level=3] [ref=e416]
+          - generic [ref=e417]:
+            - generic [ref=e418]:
+              - img [ref=e419]
+              - generic [ref=e424]: 42.00 м²
+              - generic [ref=e425]: Площадь
+            - generic [ref=e426]:
+              - img [ref=e427]
+              - generic [ref=e430]: "1"
+              - generic [ref=e431]: Комнаты
+            - generic [ref=e432]:
+              - img [ref=e433]
+              - generic [ref=e436]: 18/23
+              - generic [ref=e437]: Этаж
+      - generic [ref=e439]:
+        - generic [ref=e440]:
+          - img "1, 37.10 м²" [ref=e441]
+          - generic [ref=e444]: Квартира
+          - button [ref=e445] [cursor=pointer]:
+            - img [ref=e446]
+          - generic [ref=e448]:
+            - paragraph [ref=e449]: 20 000 ₽
+            - paragraph [ref=e450]: 539 ₽/м²
+        - generic [ref=e451]:
+          - generic [ref=e452]:
+            - img [ref=e453]
+            - paragraph [ref=e456]: улица Генерала Лизюкова, 85
+          - heading "1, 37.10 м²" [level=3] [ref=e457]
+          - generic [ref=e458]:
+            - generic [ref=e459]:
+              - img [ref=e460]
+              - generic [ref=e465]: 37.10 м²
+              - generic [ref=e466]: Площадь
+            - generic [ref=e467]:
+              - img [ref=e468]
+              - generic [ref=e471]: "1"
+              - generic [ref=e472]: Комнаты
+            - generic [ref=e473]:
+              - img [ref=e474]
+              - generic [ref=e477]: 6/9
+              - generic [ref=e478]: Этаж
+  - generic [ref=e481]:
+    - generic [ref=e483]:
+      - paragraph [ref=e486]: Галерея
+      - heading "Жизнь агентства" [level=2] [ref=e488]
+      - paragraph [ref=e489]: Офис, команда и моменты, которые нас вдохновляют
+    - button "Офис" [ref=e491] [cursor=pointer]
+    - paragraph [ref=e493]: Наш офис в Воронеже
+    - generic [ref=e825]:
+      - generic [ref=e827]:
+        - img "Ресепшн" [ref=e838]
+        - paragraph [ref=e829]: Ресепшн
+      - generic [ref=e831]:
+        - img "Рабочая зона" [ref=e840]
+        - paragraph [ref=e833]: Рабочая зона
+      - generic [ref=e835]:
+        - img "Переговорная" [ref=e842]
+        - paragraph [ref=e837]: Переговорная
+  - generic [ref=e498]:
+    - generic [ref=e500]:
+      - paragraph [ref=e503]: Наши услуги
+      - heading "Полный спектр услуг" [level=2] [ref=e505]
+      - paragraph [ref=e506]: От подбора объекта до оформления документов — берём на себя все хлопоты
+    - generic [ref=e507]:
+      - button "Продажа недвижимости Помогаем выгодно и быстро продать квартиру, дом или коммерческую недвижимость по рыночной цене." [ref=e509] [cursor=pointer]:
+        - generic [ref=e511]:
+          - img [ref=e513]
+          - generic [ref=e516]:
+            - heading "Продажа недвижимости" [level=3] [ref=e517]
+            - paragraph [ref=e518]: Помогаем выгодно и быстро продать квартиру, дом или коммерческую недвижимость по рыночной цене.
+      - 'button "Покупка и подбор Подберём объект под ваши критерии: бюджет, район, планировка. Проверим юридическую чистоту." [ref=e520] [cursor=pointer]':
+        - generic [ref=e522]:
+          - img [ref=e524]
+          - generic [ref=e527]:
+            - heading "Покупка и подбор" [level=3] [ref=e528]
+            - paragraph [ref=e529]: "Подберём объект под ваши критерии: бюджет, район, планировка. Проверим юридическую чистоту."
+      - button "Юридическое сопровождение Проверка документов, сопровождение сделки, защита интересов клиента на всех этапах." [ref=e531] [cursor=pointer]:
+        - generic [ref=e533]:
+          - img [ref=e535]
+          - generic [ref=e539]:
+            - heading "Юридическое сопровождение" [level=3] [ref=e540]
+            - paragraph [ref=e541]: Проверка документов, сопровождение сделки, защита интересов клиента на всех этапах.
+      - button "Ипотечное брокерство Одобрение ипотеки в 15+ банках, подбор лучших условий, помощь с документами." [ref=e543] [cursor=pointer]:
+        - generic [ref=e545]:
+          - img [ref=e547]
+          - generic [ref=e549]:
+            - heading "Ипотечное брокерство" [level=3] [ref=e550]
+            - paragraph [ref=e551]: Одобрение ипотеки в 15+ банках, подбор лучших условий, помощь с документами.
+      - button "Страхование сделок Страхование жизни, недвижимости и титула. Защита от рисков на сумму до 50 млн ₽." [ref=e553] [cursor=pointer]:
+        - generic [ref=e555]:
+          - img [ref=e557]
+          - generic [ref=e560]:
+            - heading "Страхование сделок" [level=3] [ref=e561]
+            - paragraph [ref=e562]: Страхование жизни, недвижимости и титула. Защита от рисков на сумму до 50 млн ₽.
+      - button "Оценка и консалтинг Профессиональная оценка рыночной стоимости объектов и инвестиционный консалтинг." [ref=e564] [cursor=pointer]:
+        - generic [ref=e566]:
+          - img [ref=e568]
+          - generic [ref=e571]:
+            - heading "Оценка и консалтинг" [level=3] [ref=e572]
+            - paragraph [ref=e573]: Профессиональная оценка рыночной стоимости объектов и инвестиционный консалтинг.
+  - generic [ref=e576]:
+    - generic [ref=e578]:
+      - paragraph [ref=e581]: Наша команда
+      - heading "Профессионалы в недвижимости" [level=2] [ref=e583]:
+        - text: Профессионалы
+        - text: в недвижимости
+      - paragraph [ref=e584]: Каждый сотрудник — сертифицированный специалист с проверенным опытом сделок
+    - generic [ref=e585]:
+      - img [ref=e586]
+      - paragraph [ref=e589]: Не удалось загрузить данные сотрудников
+      - paragraph [ref=e590]: Проверьте соединение с CRM
+  - generic [ref=e593]:
+    - generic [ref=e595]:
+      - paragraph [ref=e598]: Отзывы клиентов
+      - heading "Что говорят клиенты" [level=2] [ref=e600]
+    - generic [ref=e601]:
+      - generic [ref=e605]:
+        - img [ref=e606]
+        - paragraph [ref=e609]: "\"Оформили ипотеку и купили 3-комнатную квартиру за 3 недели. Риелтор был на связи 24/7, всё объяснял простым языком. Рекомендую!\""
+        - generic [ref=e610]:
+          - img [ref=e611]
+          - img [ref=e613]
+          - img [ref=e615]
+          - img [ref=e617]
+          - img [ref=e619]
+        - generic [ref=e621]:
+          - paragraph [ref=e622]: Александр К.
+          - paragraph [ref=e623]: Покупатель квартиры
+      - generic [ref=e627]:
+        - img [ref=e628]
+        - paragraph [ref=e631]: "\"Продали загородный дом выше рыночной цены. Профессиональная фотосессия, грамотная реклама и быстрые показы. Спасибо команде!\""
+        - generic [ref=e632]:
+          - img [ref=e633]
+          - img [ref=e635]
+          - img [ref=e637]
+          - img [ref=e639]
+          - img [ref=e641]
+        - generic [ref=e643]:
+          - paragraph [ref=e644]: Мария С.
+          - paragraph [ref=e645]: Продавец дома
+      - generic [ref=e649]:
+        - img [ref=e650]
+        - paragraph [ref=e653]: "\"Сотрудничаю с агентством уже 2 года. Помогают с покупкой коммерческой недвижимости под аренду. Доходность стабильно выше рынка.\""
+        - generic [ref=e654]:
+          - img [ref=e655]
+          - img [ref=e657]
+          - img [ref=e659]
+          - img [ref=e661]
+          - img [ref=e663]
+        - generic [ref=e665]:
+          - paragraph [ref=e666]: Дмитрий В.
+          - paragraph [ref=e667]: Инвестор
+  - generic [ref=e674]:
+    - generic [ref=e676]:
+      - paragraph [ref=e679]: Бесплатная консультация
+      - heading "Начните путь к новой жизни" [level=2] [ref=e680]:
+        - text: Начните путь к
+        - text: новой жизни
+      - paragraph [ref=e681]: Оставьте заявку и наш риелтор свяжется с вами в течение 15 минут. Бесплатный подбор, оценка и консультация.
+      - generic [ref=e682]:
+        - button "Оставить заявку" [ref=e683] [cursor=pointer]:
+          - text: Оставить заявку
+          - img
+        - link "Позвонить" [ref=e684] [cursor=pointer]:
+          - /url: tel:+7XXXXXXXXXX
+          - button "Позвонить" [ref=e685]:
+            - img
+            - text: Позвонить
+    - generic [ref=e686]:
+      - link "Телефон +7 (XXX) XXX-XX-XX Пн–Пт 9:00–20:00" [ref=e688] [cursor=pointer]:
+        - /url: tel:+7XXXXXXXXXX
+        - img [ref=e690]
+        - generic [ref=e692]:
+          - paragraph [ref=e693]: Телефон
+          - paragraph [ref=e694]: +7 (XXX) XXX-XX-XX
+          - paragraph [ref=e695]: Пн–Пт 9:00–20:00
+      - link "Email boyarova.angelina.rieltor@mail.ru Ответим в течение часа" [ref=e697] [cursor=pointer]:
+        - /url: mailto:boyarova.angelina.rieltor@mail.ru
+        - img [ref=e699]
+        - generic [ref=e702]:
+          - paragraph [ref=e703]: Email
+          - paragraph [ref=e704]: boyarova.angelina.rieltor@mail.ru
+          - paragraph [ref=e705]: Ответим в течение часа
+      - link "Офис Воронеж, ул. Донбасская, 25К2 Ежедневно 9:00 — 20:00" [ref=e707] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e709]
+        - generic [ref=e712]:
+          - paragraph [ref=e713]: Офис
+          - paragraph [ref=e714]: Воронеж, ул. Донбасская, 25К2
+          - paragraph [ref=e715]: Ежедневно 9:00 — 20:00
+  - contentinfo [ref=e716]:
+    - generic [ref=e718]:
+      - generic [ref=e719]:
+        - generic [ref=e720]:
+          - img "Ваша Крыша" [ref=e721]
+          - paragraph [ref=e722]: ИП Матвеева Ангелина Владимировна — риэлторские услуги в Воронеже и области с 2023 года.
+          - generic [ref=e723]:
+            - link "+7 (XXX) XXX-XX-XX" [ref=e724] [cursor=pointer]:
+              - /url: tel:+7XXXXXXXXXX
+              - img [ref=e725]
+              - generic [ref=e727]: +7 (XXX) XXX-XX-XX
+            - link "boyarova.angelina.rieltor@mail.ru" [ref=e728] [cursor=pointer]:
+              - /url: mailto:boyarova.angelina.rieltor@mail.ru
+              - img [ref=e729]
+              - generic [ref=e732]: boyarova.angelina.rieltor@mail.ru
+            - generic [ref=e733]:
+              - img [ref=e734]
+              - generic [ref=e737]: 394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168
+          - generic [ref=e738]:
+            - link "Telegram" [ref=e739] [cursor=pointer]:
+              - /url: https://t.me/vashakrysha
+              - img [ref=e740]
+            - link "WhatsApp" [ref=e742] [cursor=pointer]:
+              - /url: https://wa.me/78001234567
+              - img [ref=e743]
+            - link "ВКонтакте" [ref=e745] [cursor=pointer]:
+              - /url: https://vk.com/vashakrysha
+              - img [ref=e746]
+            - link "YouTube" [ref=e748] [cursor=pointer]:
+              - /url: https://youtube.com/@vashakrysha
+              - img [ref=e749]
+        - generic [ref=e751]:
+          - paragraph [ref=e752]: Каталог
+          - list [ref=e753]:
+            - listitem [ref=e754]:
+              - link "Квартиры" [ref=e755] [cursor=pointer]:
+                - /url: /catalog?category=apartment_sell
+            - listitem [ref=e756]:
+              - link "Новостройки" [ref=e757] [cursor=pointer]:
+                - /url: /catalog?category=newbuilding
+            - listitem [ref=e758]:
+              - link "Коттеджи и дома" [ref=e759] [cursor=pointer]:
+                - /url: /catalog?category=house
+            - listitem [ref=e760]:
+              - link "Коммерческая" [ref=e761] [cursor=pointer]:
+                - /url: /catalog?category=commercial
+            - listitem [ref=e762]:
+              - link "Аренда" [ref=e763] [cursor=pointer]:
+                - /url: /catalog?category=apartment_rent
+        - generic [ref=e764]:
+          - paragraph [ref=e765]: Услуги
+          - list [ref=e766]:
+            - listitem [ref=e767]:
+              - link "Продажа" [ref=e768] [cursor=pointer]:
+                - /url: /#services
+            - listitem [ref=e769]:
+              - link "Покупка" [ref=e770] [cursor=pointer]:
+                - /url: /#services
+            - listitem [ref=e771]:
+              - link "Ипотека" [ref=e772] [cursor=pointer]:
+                - /url: /#services
+            - listitem [ref=e773]:
+              - link "Юрист" [ref=e774] [cursor=pointer]:
+                - /url: /#services
+        - generic [ref=e775]:
+          - paragraph [ref=e776]: Компания
+          - list [ref=e777]:
+            - listitem [ref=e778]:
+              - link "О нас" [ref=e779] [cursor=pointer]:
+                - /url: /#
+            - listitem [ref=e780]:
+              - link "Команда" [ref=e781] [cursor=pointer]:
+                - /url: /#
+            - listitem [ref=e782]:
+              - link "Отзывы" [ref=e783] [cursor=pointer]:
+                - /url: /#reviews
+            - listitem [ref=e784]:
+              - link "Карьера" [ref=e785] [cursor=pointer]:
+                - /url: /#
+        - generic [ref=e786]:
+          - paragraph [ref=e787]: Правовая информация
+          - list [ref=e788]:
+            - listitem [ref=e789]:
+              - link "Политика конфиденциальности" [ref=e790] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e791]:
+              - link "Пользовательское соглашение" [ref=e792] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=e793]:
+              - link "Публичная оферта" [ref=e794] [cursor=pointer]:
+                - /url: /offer
+            - listitem [ref=e795]:
+              - link "Использование cookie" [ref=e796] [cursor=pointer]:
+                - /url: /cookies
+      - generic [ref=e798]:
+        - generic [ref=e799]:
+          - paragraph [ref=e800]: ИП Матвеева Ангелина Владимировна · ОГРНИП 323366800066581 · ИНН 366112052029 · УСН 6%
+          - paragraph [ref=e801]: "Юридический адрес: 394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168"
+        - paragraph [ref=e802]: © 2023–2026 ИП Матвеева Ангелина Владимировна. Все права защищены.

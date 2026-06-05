@@ -1,0 +1,552 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e6]:
+      - link "Ваша Крыша" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "Ваша Крыша" [ref=e8]
+      - generic [ref=e9]:
+        - link "Каталог" [ref=e10] [cursor=pointer]:
+          - /url: /catalog
+        - link "Услуги" [ref=e11] [cursor=pointer]:
+          - /url: /#services
+        - link "Отзывы" [ref=e12] [cursor=pointer]:
+          - /url: /#reviews
+        - link "Контакты" [ref=e13] [cursor=pointer]:
+          - /url: /#contacts
+      - generic [ref=e14]:
+        - link "8 (800) 123-45-67" [ref=e15] [cursor=pointer]:
+          - /url: tel:+78001234567
+          - img [ref=e16]
+          - generic [ref=e18]: 8 (800) 123-45-67
+        - button "Подобрать жильё" [ref=e19] [cursor=pointer]
+  - generic [ref=e23]:
+    - generic [ref=e24]:
+      - paragraph [ref=e27]: Агентство недвижимости
+      - heading "Найдём вашу идеальную крышу" [level=1] [ref=e28]:
+        - text: Найдём вашу
+        - text: идеальную крышу
+      - paragraph [ref=e29]: Продажа и аренда недвижимости в Москве и области. Более 15 лет на рынке, 5000+ успешных сделок и персональный подход к каждому клиенту.
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - textbox "Район, метро или адрес..." [ref=e36]
+        - link "Найти" [ref=e37] [cursor=pointer]:
+          - /url: /catalog
+          - button "Найти" [ref=e38]:
+            - generic [ref=e39]: Найти
+            - img
+      - generic [ref=e40]:
+        - link "Квартиры" [ref=e41] [cursor=pointer]:
+          - /url: /catalog?category=apartment_sell
+        - link "Новостройки" [ref=e42] [cursor=pointer]:
+          - /url: /catalog?category=newbuilding
+        - link "Коттеджи" [ref=e43] [cursor=pointer]:
+          - /url: /catalog?category=house
+        - link "Коммерция" [ref=e44] [cursor=pointer]:
+          - /url: /catalog?category=commercial
+        - link "Ипотека" [ref=e45] [cursor=pointer]:
+          - /url: /catalog?category=apartment_sell
+    - generic [ref=e47]:
+      - generic [ref=e52]:
+        - img "Ваша Крыша" [ref=e53]
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - generic [ref=e58]: Москва и МО
+      - generic [ref=e59]:
+        - img [ref=e60]
+        - generic [ref=e63]: 5000+ сделок
+      - generic [ref=e64]:
+        - img [ref=e65]
+        - generic [ref=e69]: Ключи за 3 дня
+      - generic [ref=e70]:
+        - img [ref=e71]
+        - generic [ref=e74]: Лучшие цены
+  - generic [ref=e77]:
+    - generic [ref=e78]:
+      - paragraph [ref=e81]: О нас в цифрах
+      - heading "Почему выбирают нас" [level=2] [ref=e83]
+    - generic [ref=e84]:
+      - generic [ref=e87]:
+        - img [ref=e89]
+        - generic [ref=e93]:
+          - paragraph [ref=e94]: 5000+
+          - paragraph [ref=e95]: Успешных сделок
+        - paragraph [ref=e96]: Продажа и аренда объектов
+      - generic [ref=e99]:
+        - img [ref=e101]
+        - generic [ref=e106]:
+          - paragraph [ref=e107]: 120+
+          - paragraph [ref=e108]: Профессионалов
+        - paragraph [ref=e109]: Опытные риелторы и юристы
+      - generic [ref=e112]:
+        - img [ref=e114]
+        - generic [ref=e117]:
+          - paragraph [ref=e118]: 15 лет
+          - paragraph [ref=e119]: На рынке
+        - paragraph [ref=e120]: С 2009 года в недвижимости
+      - generic [ref=e123]:
+        - img [ref=e125]
+        - generic [ref=e128]:
+          - paragraph [ref=e129]: 24/7
+          - paragraph [ref=e130]: Поддержка
+        - paragraph [ref=e131]: Работаем без выходных
+  - generic [ref=e134]:
+    - generic [ref=e135]:
+      - generic [ref=e136]:
+        - paragraph [ref=e139]: Каталог
+        - heading "Эксклюзивные объекты недвижимости" [level=2] [ref=e140]:
+          - text: Эксклюзивные
+          - text: объекты недвижимости
+      - link "Все объекты" [ref=e141] [cursor=pointer]:
+        - /url: /catalog
+        - button "Все объекты" [ref=e142]:
+          - text: Все объекты
+          - img
+    - generic [ref=e406]:
+      - generic [ref=e407]:
+        - generic [ref=e408]:
+          - img "2 комн., 72.00 м²" [ref=e409]
+          - generic [ref=e412]: Квартира
+          - button [ref=e413] [cursor=pointer]:
+            - img [ref=e414]
+          - generic [ref=e416]:
+            - paragraph [ref=e417]: 42 000 ₽
+            - paragraph [ref=e418]: 583 ₽/м²
+        - generic [ref=e419]:
+          - generic [ref=e420]:
+            - img [ref=e421]
+            - paragraph [ref=e424]: улица Архитектора Троицкого, 5
+          - heading "2 комн., 72.00 м²" [level=3] [ref=e425]
+          - generic [ref=e426]:
+            - generic [ref=e427]:
+              - img [ref=e428]
+              - generic [ref=e433]: 72.00 м²
+              - generic [ref=e434]: Площадь
+            - generic [ref=e435]:
+              - img [ref=e436]
+              - generic [ref=e439]: 2 комн.
+              - generic [ref=e440]: Комнаты
+            - generic [ref=e441]:
+              - img [ref=e442]
+              - generic [ref=e445]: 6/10
+              - generic [ref=e446]: Этаж
+      - generic [ref=e447]:
+        - generic [ref=e448]:
+          - img "Своб. планировка, 47.00 м²" [ref=e449]
+          - generic [ref=e452]: Квартира
+          - button [ref=e453] [cursor=pointer]:
+            - img [ref=e454]
+          - generic [ref=e456]:
+            - paragraph [ref=e457]: 7 200 000 ₽
+            - paragraph [ref=e458]: 153 191 ₽/м²
+        - generic [ref=e459]:
+          - generic [ref=e460]:
+            - img [ref=e461]
+            - paragraph [ref=e464]: улица Куколкина, 18
+          - heading "Своб. планировка, 47.00 м²" [level=3] [ref=e465]
+          - generic [ref=e466]:
+            - generic [ref=e467]:
+              - img [ref=e468]
+              - generic [ref=e473]: 47.00 м²
+              - generic [ref=e474]: Площадь
+            - generic [ref=e475]:
+              - img [ref=e476]
+              - generic [ref=e479]: Своб. планировка
+              - generic [ref=e480]: Комнаты
+            - generic [ref=e481]:
+              - img [ref=e482]
+              - generic [ref=e485]: 8/17
+              - generic [ref=e486]: Этаж
+      - generic [ref=e487]:
+        - generic [ref=e488]:
+          - img "3 комн., 64.10 м²" [ref=e489]
+          - generic [ref=e492]: Квартира
+          - button [ref=e493] [cursor=pointer]:
+            - img [ref=e494]
+          - generic [ref=e496]:
+            - paragraph [ref=e497]: 6 100 000 ₽
+            - paragraph [ref=e498]: 95 164 ₽/м²
+        - generic [ref=e499]:
+          - generic [ref=e500]:
+            - img [ref=e501]
+            - paragraph [ref=e504]: улица Владимира Невского, 3
+          - heading "3 комн., 64.10 м²" [level=3] [ref=e505]
+          - generic [ref=e506]:
+            - generic [ref=e507]:
+              - img [ref=e508]
+              - generic [ref=e513]: 64.10 м²
+              - generic [ref=e514]: Площадь
+            - generic [ref=e515]:
+              - img [ref=e516]
+              - generic [ref=e519]: 3 комн.
+              - generic [ref=e520]: Комнаты
+            - generic [ref=e521]:
+              - img [ref=e522]
+              - generic [ref=e525]: 11/16
+              - generic [ref=e526]: Этаж
+      - generic [ref=e527]:
+        - generic [ref=e528]:
+          - img "1 комн., 38.20 м²" [ref=e529]
+          - generic [ref=e532]: Квартира
+          - button [ref=e533] [cursor=pointer]:
+            - img [ref=e534]
+          - generic [ref=e536]:
+            - paragraph [ref=e537]: 4 500 000 ₽
+            - paragraph [ref=e538]: 117 801 ₽/м²
+        - generic [ref=e539]:
+          - generic [ref=e540]:
+            - img [ref=e541]
+            - paragraph [ref=e544]: Ростовская улица, 58/4
+          - heading "1 комн., 38.20 м²" [level=3] [ref=e545]
+          - generic [ref=e546]:
+            - generic [ref=e547]:
+              - img [ref=e548]
+              - generic [ref=e553]: 38.20 м²
+              - generic [ref=e554]: Площадь
+            - generic [ref=e555]:
+              - img [ref=e556]
+              - generic [ref=e559]: 1 комн.
+              - generic [ref=e560]: Комнаты
+            - generic [ref=e561]:
+              - img [ref=e562]
+              - generic [ref=e565]: 2/10
+              - generic [ref=e566]: Этаж
+      - generic [ref=e567]:
+        - generic [ref=e568]:
+          - img "2 комн., 48.60 м²" [ref=e569]
+          - generic [ref=e572]: Квартира
+          - button [ref=e573] [cursor=pointer]:
+            - img [ref=e574]
+          - generic [ref=e576]:
+            - paragraph [ref=e577]: 7 500 000 ₽
+            - paragraph [ref=e578]: 154 321 ₽/м²
+        - generic [ref=e579]:
+          - generic [ref=e580]:
+            - img [ref=e581]
+            - paragraph [ref=e584]: улица Историка Костомарова, 42А
+          - heading "2 комн., 48.60 м²" [level=3] [ref=e585]
+          - generic [ref=e586]:
+            - generic [ref=e587]:
+              - img [ref=e588]
+              - generic [ref=e593]: 48.60 м²
+              - generic [ref=e594]: Площадь
+            - generic [ref=e595]:
+              - img [ref=e596]
+              - generic [ref=e599]: 2 комн.
+              - generic [ref=e600]: Комнаты
+            - generic [ref=e601]:
+              - img [ref=e602]
+              - generic [ref=e605]: 14/17
+              - generic [ref=e606]: Этаж
+      - generic [ref=e607]:
+        - generic [ref=e608]:
+          - img "1 комн., 35.40 м²" [ref=e609]
+          - generic [ref=e612]: Квартира
+          - button [ref=e613] [cursor=pointer]:
+            - img [ref=e614]
+          - generic [ref=e616]:
+            - paragraph [ref=e617]: 5 500 000 ₽
+            - paragraph [ref=e618]: 155 367 ₽/м²
+        - generic [ref=e619]:
+          - generic [ref=e620]:
+            - img [ref=e621]
+            - paragraph [ref=e624]: бульвар Художников, 4
+          - heading "1 комн., 35.40 м²" [level=3] [ref=e625]
+          - generic [ref=e626]:
+            - generic [ref=e627]:
+              - img [ref=e628]
+              - generic [ref=e633]: 35.40 м²
+              - generic [ref=e634]: Площадь
+            - generic [ref=e635]:
+              - img [ref=e636]
+              - generic [ref=e639]: 1 комн.
+              - generic [ref=e640]: Комнаты
+            - generic [ref=e641]:
+              - img [ref=e642]
+              - generic [ref=e645]: 7/14
+              - generic [ref=e646]: Этаж
+      - generic [ref=e647]:
+        - generic [ref=e648]:
+          - img "Коммерция, 132.00 м²" [ref=e649]
+          - generic [ref=e652]: Коммерция
+          - button [ref=e653] [cursor=pointer]:
+            - img [ref=e654]
+          - generic [ref=e656]:
+            - paragraph [ref=e657]: 120 000 ₽
+            - paragraph [ref=e658]: 909 ₽/м²
+        - generic [ref=e659]:
+          - generic [ref=e660]:
+            - img [ref=e661]
+            - paragraph [ref=e664]: Московский проспект, 12
+          - heading "Коммерция, 132.00 м²" [level=3] [ref=e665]
+          - generic [ref=e666]:
+            - generic [ref=e667]:
+              - img [ref=e668]
+              - generic [ref=e673]: 132.00 м²
+              - generic [ref=e674]: Площадь
+            - generic [ref=e675]:
+              - img [ref=e676]
+              - generic [ref=e679]: —
+              - generic [ref=e680]: Помещения
+            - generic [ref=e681]:
+              - img [ref=e682]
+              - generic [ref=e685]: 2/2
+              - generic [ref=e686]: Этаж
+      - generic [ref=e687]:
+        - generic [ref=e688]:
+          - img "1 комн., 35.30 м²" [ref=e689]
+          - generic [ref=e692]: Квартира
+          - button [ref=e693] [cursor=pointer]:
+            - img [ref=e694]
+          - generic [ref=e696]:
+            - paragraph [ref=e697]: 23 000 ₽
+            - paragraph [ref=e698]: 652 ₽/м²
+        - generic [ref=e699]:
+          - generic [ref=e700]:
+            - img [ref=e701]
+            - paragraph [ref=e704]: Олимпийский бульвар, 6
+          - heading "1 комн., 35.30 м²" [level=3] [ref=e705]
+          - generic [ref=e706]:
+            - generic [ref=e707]:
+              - img [ref=e708]
+              - generic [ref=e713]: 35.30 м²
+              - generic [ref=e714]: Площадь
+            - generic [ref=e715]:
+              - img [ref=e716]
+              - generic [ref=e719]: 1 комн.
+              - generic [ref=e720]: Комнаты
+            - generic [ref=e721]:
+              - img [ref=e722]
+              - generic [ref=e725]: 5/25
+              - generic [ref=e726]: Этаж
+      - generic [ref=e727]:
+        - generic [ref=e728]:
+          - img "1 комн., 29.80 м²" [ref=e729]
+          - generic [ref=e732]: Квартира
+          - button [ref=e733] [cursor=pointer]:
+            - img [ref=e734]
+          - generic [ref=e736]:
+            - paragraph [ref=e737]: 2 900 000 ₽
+            - paragraph [ref=e738]: 97 315 ₽/м²
+        - generic [ref=e739]:
+          - generic [ref=e740]:
+            - img [ref=e741]
+            - paragraph [ref=e744]: Путиловская улица, 15А
+          - heading "1 комн., 29.80 м²" [level=3] [ref=e745]
+          - generic [ref=e746]:
+            - generic [ref=e747]:
+              - img [ref=e748]
+              - generic [ref=e753]: 29.80 м²
+              - generic [ref=e754]: Площадь
+            - generic [ref=e755]:
+              - img [ref=e756]
+              - generic [ref=e759]: 1 комн.
+              - generic [ref=e760]: Комнаты
+            - generic [ref=e761]:
+              - img [ref=e762]
+              - generic [ref=e765]: 2/5
+              - generic [ref=e766]: Этаж
+  - generic [ref=e147]:
+    - generic [ref=e148]:
+      - paragraph [ref=e151]: Наши услуги
+      - heading "Полный спектр услуг" [level=2] [ref=e153]
+      - paragraph [ref=e154]: От подбора объекта до оформления документов — берём на себя все хлопоты
+    - generic [ref=e155]:
+      - button "Продажа недвижимости Помогаем выгодно и быстро продать квартиру, дом или коммерческую недвижимость по рыночной цене." [ref=e156] [cursor=pointer]:
+        - generic [ref=e158]:
+          - img [ref=e160]
+          - generic [ref=e163]:
+            - heading "Продажа недвижимости" [level=3] [ref=e164]
+            - paragraph [ref=e165]: Помогаем выгодно и быстро продать квартиру, дом или коммерческую недвижимость по рыночной цене.
+      - 'button "Покупка и подбор Подберём объект под ваши критерии: бюджет, район, планировка. Проверим юридическую чистоту." [ref=e166] [cursor=pointer]':
+        - generic [ref=e168]:
+          - img [ref=e170]
+          - generic [ref=e173]:
+            - heading "Покупка и подбор" [level=3] [ref=e174]
+            - paragraph [ref=e175]: "Подберём объект под ваши критерии: бюджет, район, планировка. Проверим юридическую чистоту."
+      - button "Юридическое сопровождение Проверка документов, сопровождение сделки, защита интересов клиента на всех этапах." [ref=e176] [cursor=pointer]:
+        - generic [ref=e178]:
+          - img [ref=e180]
+          - generic [ref=e184]:
+            - heading "Юридическое сопровождение" [level=3] [ref=e185]
+            - paragraph [ref=e186]: Проверка документов, сопровождение сделки, защита интересов клиента на всех этапах.
+      - button "Ипотечное брокерство Одобрение ипотеки в 15+ банках, подбор лучших условий, помощь с документами." [ref=e187] [cursor=pointer]:
+        - generic [ref=e189]:
+          - img [ref=e191]
+          - generic [ref=e193]:
+            - heading "Ипотечное брокерство" [level=3] [ref=e194]
+            - paragraph [ref=e195]: Одобрение ипотеки в 15+ банках, подбор лучших условий, помощь с документами.
+      - button "Страхование сделок Страхование жизни, недвижимости и титула. Защита от рисков на сумму до 50 млн ₽." [ref=e196] [cursor=pointer]:
+        - generic [ref=e198]:
+          - img [ref=e200]
+          - generic [ref=e203]:
+            - heading "Страхование сделок" [level=3] [ref=e204]
+            - paragraph [ref=e205]: Страхование жизни, недвижимости и титула. Защита от рисков на сумму до 50 млн ₽.
+      - button "Оценка и консалтинг Профессиональная оценка рыночной стоимости объектов и инвестиционный консалтинг." [ref=e206] [cursor=pointer]:
+        - generic [ref=e208]:
+          - img [ref=e210]
+          - generic [ref=e213]:
+            - heading "Оценка и консалтинг" [level=3] [ref=e214]
+            - paragraph [ref=e215]: Профессиональная оценка рыночной стоимости объектов и инвестиционный консалтинг.
+  - generic [ref=e218]:
+    - generic [ref=e219]:
+      - paragraph [ref=e222]: Отзывы клиентов
+      - heading "Что говорят клиенты" [level=2] [ref=e224]
+    - generic [ref=e225]:
+      - generic [ref=e228]:
+        - img [ref=e229]
+        - paragraph [ref=e232]: "\"Оформили ипотеку и купили 3-комнатную квартиру за 3 недели. Риелтор был на связи 24/7, всё объяснял простым языком. Рекомендую!\""
+        - generic [ref=e233]:
+          - img [ref=e234]
+          - img [ref=e236]
+          - img [ref=e238]
+          - img [ref=e240]
+          - img [ref=e242]
+        - generic [ref=e244]:
+          - paragraph [ref=e245]: Александр К.
+          - paragraph [ref=e246]: Покупатель квартиры
+      - generic [ref=e249]:
+        - img [ref=e250]
+        - paragraph [ref=e253]: "\"Продали загородный дом выше рыночной цены. Профессиональная фотосессия, грамотная реклама и быстрые показы. Спасибо команде!\""
+        - generic [ref=e254]:
+          - img [ref=e255]
+          - img [ref=e257]
+          - img [ref=e259]
+          - img [ref=e261]
+          - img [ref=e263]
+        - generic [ref=e265]:
+          - paragraph [ref=e266]: Мария С.
+          - paragraph [ref=e267]: Продавец дома
+      - generic [ref=e270]:
+        - img [ref=e271]
+        - paragraph [ref=e274]: "\"Сотрудничаю с агентством уже 4 года. Помогают с покупкой коммерческой недвижимости под аренду. Доходность стабильно выше рынка.\""
+        - generic [ref=e275]:
+          - img [ref=e276]
+          - img [ref=e278]
+          - img [ref=e280]
+          - img [ref=e282]
+          - img [ref=e284]
+        - generic [ref=e286]:
+          - paragraph [ref=e287]: Дмитрий В.
+          - paragraph [ref=e288]: Инвестор
+  - generic [ref=e295]:
+    - generic [ref=e296]:
+      - paragraph [ref=e299]: Бесплатная консультация
+      - heading "Начните путь к новой жизни" [level=2] [ref=e300]:
+        - text: Начните путь к
+        - text: новой жизни
+      - paragraph [ref=e301]: Оставьте заявку и наш риелтор свяжется с вами в течение 15 минут. Бесплатный подбор, оценка и консультация.
+      - generic [ref=e302]:
+        - button "Оставить заявку" [ref=e303] [cursor=pointer]:
+          - text: Оставить заявку
+          - img
+        - link "Позвонить" [ref=e304] [cursor=pointer]:
+          - /url: tel:+78001234567
+          - button "Позвонить" [ref=e305]:
+            - img
+            - text: Позвонить
+    - generic [ref=e306]:
+      - link "Телефон 8 (800) 123-45-67 Бесплатный звонок по РФ" [ref=e307] [cursor=pointer]:
+        - /url: tel:+78001234567
+        - img [ref=e309]
+        - generic [ref=e311]:
+          - paragraph [ref=e312]: Телефон
+          - paragraph [ref=e313]: 8 (800) 123-45-67
+          - paragraph [ref=e314]: Бесплатный звонок по РФ
+      - link "Email info@vashakrysha.ru Ответим в течение часа" [ref=e315] [cursor=pointer]:
+        - /url: mailto:info@vashakrysha.ru
+        - img [ref=e317]
+        - generic [ref=e320]:
+          - paragraph [ref=e321]: Email
+          - paragraph [ref=e322]: info@vashakrysha.ru
+          - paragraph [ref=e323]: Ответим в течение часа
+      - link "Офис Москва, ул. Тверская, 15 Ежедневно 9:00 — 21:00" [ref=e324] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e326]
+        - generic [ref=e329]:
+          - paragraph [ref=e330]: Офис
+          - paragraph [ref=e331]: Москва, ул. Тверская, 15
+          - paragraph [ref=e332]: Ежедневно 9:00 — 21:00
+  - contentinfo [ref=e333]:
+    - generic [ref=e335]:
+      - generic [ref=e336]:
+        - generic [ref=e337]:
+          - img "Ваша Крыша" [ref=e338]
+          - paragraph [ref=e339]: Агентство недвижимости «Ваша Крыша» — надёжный партнёр в сфере недвижимости с 2009 года.
+          - generic [ref=e340]:
+            - link "8 (800) 123-45-67" [ref=e341] [cursor=pointer]:
+              - /url: tel:+78001234567
+              - img [ref=e342]
+              - generic [ref=e344]: 8 (800) 123-45-67
+            - link "info@vashakrysha.ru" [ref=e345] [cursor=pointer]:
+              - /url: mailto:info@vashakrysha.ru
+              - img [ref=e346]
+              - generic [ref=e349]: info@vashakrysha.ru
+            - generic [ref=e350]:
+              - img [ref=e351]
+              - generic [ref=e354]: Москва, ул. Тверская, 15
+          - generic [ref=e355]:
+            - link "Telegram" [ref=e356] [cursor=pointer]:
+              - /url: https://t.me/vashakrysha
+              - img [ref=e357]
+            - link "WhatsApp" [ref=e359] [cursor=pointer]:
+              - /url: https://wa.me/78001234567
+              - img [ref=e360]
+            - link "ВКонтакте" [ref=e362] [cursor=pointer]:
+              - /url: https://vk.com/vashakrysha
+              - img [ref=e363]
+            - link "YouTube" [ref=e365] [cursor=pointer]:
+              - /url: https://youtube.com/@vashakrysha
+              - img [ref=e366]
+        - generic [ref=e368]:
+          - paragraph [ref=e369]: Каталог
+          - list [ref=e370]:
+            - listitem [ref=e371]:
+              - link "Квартиры" [ref=e372] [cursor=pointer]:
+                - /url: "#catalog"
+            - listitem [ref=e373]:
+              - link "Новостройки" [ref=e374] [cursor=pointer]:
+                - /url: "#catalog"
+            - listitem [ref=e375]:
+              - link "Коттеджи и дома" [ref=e376] [cursor=pointer]:
+                - /url: "#catalog"
+            - listitem [ref=e377]:
+              - link "Коммерческая" [ref=e378] [cursor=pointer]:
+                - /url: "#catalog"
+        - generic [ref=e379]:
+          - paragraph [ref=e380]: Услуги
+          - list [ref=e381]:
+            - listitem [ref=e382]:
+              - link "Продажа" [ref=e383] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e384]:
+              - link "Покупка" [ref=e385] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e386]:
+              - link "Ипотека" [ref=e387] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e388]:
+              - link "Юрист" [ref=e389] [cursor=pointer]:
+                - /url: "#services"
+        - generic [ref=e390]:
+          - paragraph [ref=e391]: Компания
+          - list [ref=e392]:
+            - listitem [ref=e393]:
+              - link "О нас" [ref=e394] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e395]:
+              - link "Команда" [ref=e396] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e397]:
+              - link "Отзывы" [ref=e398] [cursor=pointer]:
+                - /url: "#reviews"
+            - listitem [ref=e399]:
+              - link "Карьера" [ref=e400] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e401]:
+        - paragraph [ref=e402]: © 2025 Агентство недвижимости «Ваша Крыша». Все права защищены.
+        - generic [ref=e403]:
+          - link "Политика конфиденциальности" [ref=e404] [cursor=pointer]:
+            - /url: "#"
+          - link "Пользовательское соглашение" [ref=e405] [cursor=pointer]:
+            - /url: "#"
