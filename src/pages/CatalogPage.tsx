@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { LazyImage } from "@/components/ui/LazyImage";
 import { useProperties } from "@/hooks/useProperties";
 import {
   MapPin, Maximize, BedDouble, Building, Heart,
@@ -94,7 +95,7 @@ export default function CatalogPage() {
     floor: p.floor,
     floors_total: p.floors_total,
     category: p.category,
-    cover_url: p.cover_url || PLACEHOLDER_IMAGE,
+    cover_url: p.cover_url,
   }));
 
   const filtered = activeCategory === "all"
@@ -189,12 +190,12 @@ export default function CatalogPage() {
                 <ScrollReveal key={property.id} delay={index * 0.06} direction="up">
                   <Card className="group flex flex-col overflow-hidden bg-zinc-900/40 border-white/5 hover:border-primary/20 rounded-2xl md:rounded-[1.5rem] h-[420px] sm:h-[440px] md:h-[460px] hover-lift transition-all duration-500">
                     <div className="relative h-[200px] sm:h-[220px] flex-shrink-0 overflow-hidden bg-zinc-800">
-                      <img
+                      <LazyImage
                         src={property.cover_url}
                         alt={property.title}
-                        className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-90"
-                        loading="lazy"
-                        onError={(e) => { (e.target as HTMLImageElement).src = PLACEHOLDER_IMAGE; }}
+                        placeholder={PLACEHOLDER_IMAGE}
+                        className="w-full h-full object-cover group-hover:opacity-90"
+                        loading={index < 3 ? "eager" : "lazy"}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
                       <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">

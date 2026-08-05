@@ -8,3 +8,6 @@ dist/
 *.p12
 *.crt
 *.key
+docs/credentials.md
+deploy_key
+deploy_key.pub
