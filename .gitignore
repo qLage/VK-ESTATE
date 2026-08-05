@@ -11,3 +11,5 @@ dist/
 docs/credentials.md
 deploy_key
 deploy_key.pub
+deploy_ed25519
+deploy_ed25519.pub
