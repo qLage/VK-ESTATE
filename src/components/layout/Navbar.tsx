@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Каталог", to: "/catalog", section: "catalog" },
   { label: "Галерея", to: "/#gallery", section: "gallery" },
   { label: "Услуги", to: "/#services", section: "services" },
-  { label: "Команда", to: "/#team", section: "team" },
   { label: "Отзывы", to: "/#reviews", section: "reviews" },
   { label: "Контакты", to: "/#contacts", section: "contacts" },
 ];
