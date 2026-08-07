@@ -88,7 +88,9 @@ class SiteAPIClient {
     const res = await this.request<ApiEmployee[]>(
       `/employees/public?limit=${limit}`
     );
-    return res.data || [];
+    // The public employees endpoint returns a plain array instead of { data: [...] }.
+    const payload = res as unknown as ApiEmployee[] | { data?: ApiEmployee[] };
+    return Array.isArray(payload) ? payload : payload.data || [];
   }
 
   // Public gallery albums
