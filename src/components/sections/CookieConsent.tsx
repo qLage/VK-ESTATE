@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { X, Cookie, Settings2 } from "lucide-react";
 
 const COOKIE_CONSENT_KEY = "vkrysha_cookie_consent";
 
+function hasConsentRecord(): boolean {
+  if (typeof window === "undefined") return false;
+  return Boolean(localStorage.getItem(COOKIE_CONSENT_KEY));
+}
+
 export function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(() => !hasConsentRecord());
   const [showSettings, setShowSettings] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (!saved) {
-      setVisible(true);
-    }
-  }, []);
 
   const acceptAll = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ consent: "all", date: new Date().toISOString() }));

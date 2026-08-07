@@ -17,7 +17,7 @@ export function useProperties(limit = 20) {
           setProperties(data);
           setError(null);
         }
-      } catch (e) {
+      } catch {
         if (mounted) {
           setError("Не удалось загрузить объекты");
         }

@@ -33,6 +33,8 @@ export function useGallery() {
 
     loadAlbums();
     return () => { cancelled = true; };
+    // activeAlbum is read only to set a default once; albums should not reload when it changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,6 +60,8 @@ export function useGallery() {
 
     loadPhotos();
     return () => { cancelled = true; };
+    // We intentionally watch only the slug; other album fields should not trigger a refetch.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeAlbum?.slug]);
 
   return { albums, photos, activeAlbum, setActiveAlbum, loading, error };

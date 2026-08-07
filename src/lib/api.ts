@@ -37,6 +37,7 @@ export interface ApiEmployee {
   phone: string | null;
   email: string | null;
   avatar_url: string | null;
+  position_id: string | null;
   position_name: string | null;
 }
 

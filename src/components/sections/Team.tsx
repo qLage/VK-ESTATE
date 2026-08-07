@@ -1,6 +1,7 @@
 import { useEmployees } from "@/hooks/useEmployees";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Phone, Mail, User } from "lucide-react";
+import type { ApiEmployee } from "@/lib/api";
 
 const PLACEHOLDER_AVATAR = "/placeholder-avatar.svg";
 
@@ -14,8 +15,20 @@ const POSITION_HIERARCHY = [
   "Администратор",
 ];
 
-function getPositionPriority(name: string | null): number {
-  if (!name) return 999;
+// Fallback: backend currently returns position_name: null, so map known position_id slugs
+const POSITION_ID_TO_NAME: Record<string, string> = {
+  "pos-director": "Директор",
+  "pos-comm": "Коммерческий директор",
+  "pos-mop": "Руководитель отдела продаж",
+  "pos-realtor": "Риелтор",
+  "pos-admin": "Администратор",
+};
+
+function getEmployeePosition(emp: ApiEmployee): string {
+  return emp.position_name || POSITION_ID_TO_NAME[emp.position_id || ""] || "Другое";
+}
+
+function getPositionPriority(name: string): number {
   const idx = POSITION_HIERARCHY.indexOf(name);
   return idx === -1 ? 999 : idx;
 }
@@ -27,9 +40,9 @@ interface TeamProps {
 export function Team({ limit }: TeamProps = {}) {
   const { employees, loading, error } = useEmployees(limit || 50);
 
-  // Группировка по position_name
-  const groups = employees.reduce<Record<string, typeof employees>>((acc, emp) => {
-    const pos = emp.position_name || "Другое";
+  // Группировка по должности (с fallback на position_id)
+  const groups = employees.reduce<Record<string, ApiEmployee[]>>((acc, emp) => {
+    const pos = getEmployeePosition(emp);
     if (!acc[pos]) acc[pos] = [];
     acc[pos].push(emp);
     return acc;
@@ -122,11 +135,14 @@ export function Team({ limit }: TeamProps = {}) {
                           <h3 className="text-sm md:text-base font-bold text-white group-hover:text-primary transition-colors">
                             {employee.full_name}
                           </h3>
-                          {employee.position_name && (
-                            <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">
-                              {employee.position_name}
-                            </p>
-                          )}
+                          {(() => {
+                            const positionName = getEmployeePosition(employee);
+                            return positionName !== "Другое" ? (
+                              <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">
+                                {positionName}
+                              </p>
+                            ) : null;
+                          })()}
                         </div>
 
                         {/* Contacts */}
