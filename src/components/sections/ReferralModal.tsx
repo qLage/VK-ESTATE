@@ -158,7 +158,7 @@ export function ReferralModal() {
 
             <Button
               onClick={() => setShowForm(true)}
-              className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-black"
+              className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-white"
             >
               Оставить заявку
             </Button>
@@ -256,7 +256,7 @@ export function ReferralModal() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-black disabled:opacity-50"
+                className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-white disabled:opacity-50"
               >
                 {loading ? "Отправка..." : "Отправить заявку"}
               </Button>
@@ -279,7 +279,7 @@ export function ReferralModal() {
             </p>
             <Button
               onClick={handleClose}
-              className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-black"
+              className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-white"
             >
               Понятно
             </Button>
