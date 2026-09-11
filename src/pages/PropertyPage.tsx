@@ -2,12 +2,12 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LazyImage } from "@/components/ui/LazyImage";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { PropertyGallery } from "@/components/catalog/PropertyGallery";
+import { PropertyMap } from "@/components/catalog/PropertyMap";
 import { useProperty } from "@/hooks/useProperty";
 import type { CatalogPhoto } from "@/lib/api";
 import {
-  PLACEHOLDER_IMAGE,
   formatArea,
   formatFloor,
   formatPrice,
@@ -38,23 +38,6 @@ function photoList(photos: CatalogPhoto[] | undefined, coverUrl: string | null):
   return coverUrl ? [coverUrl] : [];
 }
 
-function mapUrl(property: {
-  city: string | null;
-  address: string | null;
-  lat?: number | null;
-  lng?: number | null;
-  coordinates?: { lat?: number; lng?: number; latitude?: number; longitude?: number } | null;
-}) {
-  const lat = property.lat ?? property.coordinates?.lat ?? property.coordinates?.latitude;
-  const lng = property.lng ?? property.coordinates?.lng ?? property.coordinates?.longitude;
-  if (lat && lng) {
-    return `https://yandex.ru/maps/?pt=${lng},${lat}&z=16&l=map`;
-  }
-  const query = [property.city, property.address].filter(Boolean).join(", ");
-  if (!query) return null;
-  return `https://yandex.ru/maps/?text=${encodeURIComponent(query)}`;
-}
-
 export default function PropertyPage() {
   const { id } = useParams();
   const { property, loading, error } = useProperty(id);
@@ -64,7 +47,6 @@ export default function PropertyPage() {
     () => (property ? photoList(property.photos, property.coverUrl) : []),
     [property],
   );
-  const currentPhoto = photos[Math.min(activePhoto, Math.max(photos.length - 1, 0))] || PLACEHOLDER_IMAGE;
 
   if (loading) {
     return (
@@ -95,7 +77,8 @@ export default function PropertyPage() {
   const location = [property.city, property.address].filter(Boolean).join(", ") || "Адрес уточняется";
   const video = property.videoUrl || property.video;
   const tour = property.tour3dUrl || property.tour3d;
-  const maps = mapUrl(property);
+  const lat = property.lat ?? property.coordinates?.lat ?? property.coordinates?.latitude;
+  const lng = property.lng ?? property.coordinates?.lng ?? property.coordinates?.longitude;
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-12 md:pt-32 md:pb-20">
@@ -114,38 +97,12 @@ export default function PropertyPage() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.8fr] gap-6 lg:gap-8">
-            <div className="space-y-4">
-              <div className="relative overflow-hidden rounded-2xl md:rounded-[1.5rem] bg-zinc-800 aspect-[16/10]">
-                <LazyImage
-                  src={currentPhoto}
-                  alt={title}
-                  placeholder={PLACEHOLDER_IMAGE}
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-              {photos.length > 1 && (
-                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-                  {photos.map((url, index) => (
-                    <button
-                      key={`${url}-${index}`}
-                      type="button"
-                      onClick={() => setActivePhoto(index)}
-                      className={`relative overflow-hidden rounded-xl aspect-square border ${
-                        index === activePhoto ? "border-primary" : "border-white/5"
-                      }`}
-                    >
-                      <LazyImage
-                        src={url}
-                        alt={`${title} ${index + 1}`}
-                        placeholder={PLACEHOLDER_IMAGE}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <PropertyGallery
+              photos={photos}
+              alt={title}
+              activeIndex={activePhoto}
+              onChange={setActivePhoto}
+            />
 
             <div className="space-y-6">
               <div>
@@ -159,7 +116,7 @@ export default function PropertyPage() {
                 <p className="text-3xl md:text-4xl font-black text-primary">
                   {formatPrice(property.price)}
                 </p>
-                {property.areaTotal || property.landArea ? (
+                {area && property.category !== "land" ? (
                   <p className="text-xs font-bold text-white/40 uppercase tracking-wider mt-1">
                     {formatPricePerMeter(property.price, area)}
                   </p>
@@ -227,13 +184,6 @@ export default function PropertyPage() {
               )}
 
               <div className="flex flex-wrap gap-2">
-                {maps && (
-                  <a href={maps} target="_blank" rel="noreferrer">
-                    <Button variant="outline" size="sm">
-                      На карте <ExternalLink className="w-3.5 h-3.5 ml-1" />
-                    </Button>
-                  </a>
-                )}
                 {video && (
                   <a href={video} target="_blank" rel="noreferrer">
                     <Button variant="outline" size="sm">Видео</Button>
@@ -247,6 +197,27 @@ export default function PropertyPage() {
               </div>
             </div>
           </div>
+
+          <ScrollReveal className="mt-8 md:mt-10" direction="up">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">На карте</p>
+              {(lat && lng) || location ? (
+                <a
+                  href={
+                    lat && lng
+                      ? `https://yandex.ru/maps/?pt=${lng},${lat}&z=16&l=map`
+                      : `https://yandex.ru/maps/?text=${encodeURIComponent(location)}`
+                  }
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-primary"
+                >
+                  Открыть в Яндекс.Картах <ExternalLink className="w-3 h-3 ml-1" />
+                </a>
+              ) : null}
+            </div>
+            <PropertyMap lat={lat} lng={lng} city={property.city} address={property.address} />
+          </ScrollReveal>
 
           {property.description && (
             <ScrollReveal className="mt-10 max-w-3xl" direction="up">
