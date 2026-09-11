@@ -12,6 +12,7 @@ import {
   formatRooms,
   getCategoryMeta,
   makeTitle,
+  propertyArea,
 } from "@/lib/property";
 import { BedDouble, Building, Heart, MapPin, Maximize } from "lucide-react";
 
@@ -29,7 +30,8 @@ export function PropertyCard({
   onToggleFavorite,
 }: PropertyCardProps) {
   const meta = getCategoryMeta(property.category);
-  const title = makeTitle(property.areaTotal, property.rooms, property.category);
+  const area = propertyArea(property);
+  const title = makeTitle(area, property.rooms, property.category);
   const location = property.address || property.city || "Адрес уточняется";
 
   return (
@@ -66,9 +68,9 @@ export function PropertyCard({
             <p className="text-xl md:text-2xl font-black text-white tracking-tight">
               {formatPrice(property.price)}
             </p>
-            {property.areaTotal ? (
+            {area && property.category !== "land" ? (
               <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider">
-                {formatPricePerMeter(property.price, property.areaTotal)}
+                {formatPricePerMeter(property.price, area)}
               </p>
             ) : null}
           </div>
@@ -85,7 +87,7 @@ export function PropertyCard({
             <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] border border-white/5">
               <Maximize className="w-3.5 h-3.5 text-primary/60" />
               <span className="text-[10px] md:text-xs font-bold text-white">
-                {formatArea(property.areaTotal, property.category)}
+                {formatArea(area, property.category)}
               </span>
               <span className="text-[9px] text-white/20">Площадь</span>
             </div>

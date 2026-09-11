@@ -15,6 +15,7 @@ import {
   formatRooms,
   getCategoryMeta,
   makeTitle,
+  propertyArea,
 } from "@/lib/property";
 import {
   ArrowLeft,
@@ -37,9 +38,15 @@ function photoList(photos: CatalogPhoto[] | undefined, coverUrl: string | null):
   return coverUrl ? [coverUrl] : [];
 }
 
-function mapUrl(property: { city: string | null; address: string | null; coordinates?: { lat?: number; lng?: number; latitude?: number; longitude?: number } | null }) {
-  const lat = property.coordinates?.lat ?? property.coordinates?.latitude;
-  const lng = property.coordinates?.lng ?? property.coordinates?.longitude;
+function mapUrl(property: {
+  city: string | null;
+  address: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  coordinates?: { lat?: number; lng?: number; latitude?: number; longitude?: number } | null;
+}) {
+  const lat = property.lat ?? property.coordinates?.lat ?? property.coordinates?.latitude;
+  const lng = property.lng ?? property.coordinates?.lng ?? property.coordinates?.longitude;
   if (lat && lng) {
     return `https://yandex.ru/maps/?pt=${lng},${lat}&z=16&l=map`;
   }
@@ -83,7 +90,8 @@ export default function PropertyPage() {
   }
 
   const meta = getCategoryMeta(property.category);
-  const title = makeTitle(property.areaTotal, property.rooms, property.category);
+  const area = propertyArea(property);
+  const title = makeTitle(area, property.rooms, property.category);
   const location = [property.city, property.address].filter(Boolean).join(", ") || "Адрес уточняется";
   const video = property.videoUrl || property.video;
   const tour = property.tour3dUrl || property.tour3d;
@@ -151,9 +159,9 @@ export default function PropertyPage() {
                 <p className="text-3xl md:text-4xl font-black text-primary">
                   {formatPrice(property.price)}
                 </p>
-                {property.areaTotal ? (
+                {property.areaTotal || property.landArea ? (
                   <p className="text-xs font-bold text-white/40 uppercase tracking-wider mt-1">
-                    {formatPricePerMeter(property.price, property.areaTotal)}
+                    {formatPricePerMeter(property.price, area)}
                   </p>
                 ) : null}
               </div>
@@ -161,7 +169,7 @@ export default function PropertyPage() {
               <div className="grid grid-cols-3 gap-2">
                 <div className="flex flex-col items-center gap-1 p-3 rounded-xl bg-white/[0.02] border border-white/5">
                   <Maximize className="w-4 h-4 text-primary/60" />
-                  <span className="text-sm font-bold text-white">{formatArea(property.areaTotal, property.category)}</span>
+                  <span className="text-sm font-bold text-white">{formatArea(area, property.category)}</span>
                   <span className="text-[9px] text-white/20">Площадь</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/[0.02] border border-white/5">

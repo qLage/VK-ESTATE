@@ -14,12 +14,11 @@ export const CATEGORY_META: Record<string, { tag: string; unit: string; roomsLab
 
 export const FILTER_CATEGORIES = [
   { key: "all", label: "Все", api: undefined },
-  { key: "apartment_sell", label: "Квартиры", api: "квартира" },
-  { key: "newbuilding", label: "Новостройки", api: "новостройка" },
-  { key: "house", label: "Дома", api: "дом" },
-  { key: "commercial", label: "Коммерция", api: "коммерческая" },
-  { key: "apartment_rent", label: "Аренда", api: "аренда" },
-  { key: "land", label: "Участки", api: "участок" },
+  { key: "apartment_sell", label: "Квартиры", api: "apartment_sell" },
+  { key: "house", label: "Дома", api: "house" },
+  { key: "apartment_rent", label: "Аренда", api: "apartment_rent" },
+  { key: "commercial", label: "Коммерция", api: "commercial_rent" },
+  { key: "land", label: "Участки", api: "land" },
 ] as const;
 
 const CATEGORY_ALIASES: Record<string, string> = {
@@ -55,6 +54,16 @@ export function getCategoryMeta(category: string | null | undefined) {
   return CATEGORY_META[key] || CATEGORY_META.secondary;
 }
 
+export function propertyArea(property: {
+  category: string;
+  areaTotal?: number | null;
+  landArea?: number | null;
+}): number | null {
+  return normalizeCategory(property.category) === "land"
+    ? property.landArea ?? null
+    : property.areaTotal ?? null;
+}
+
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("ru-RU").format(price) + " ₽";
 }
@@ -66,7 +75,8 @@ export function formatPricePerMeter(price: number, area: number | null | undefin
 
 export function formatArea(area: number | null | undefined, category: string): string {
   if (!area) return "—";
-  return `${area} ${getCategoryMeta(category).unit}`;
+  const rounded = Number.isInteger(area) ? String(area) : String(Math.round(area * 10) / 10);
+  return `${rounded} ${getCategoryMeta(category).unit}`;
 }
 
 export function formatRooms(rooms: string | null | undefined, category: string): string {
