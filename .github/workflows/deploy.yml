@@ -3,6 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -41,6 +42,7 @@ jobs:
           source: "dist/*"
           target: ${{ secrets.DEPLOY_PATH }}
           strip_components: 1
+          overwrite: true
 
       - uses: appleboy/ssh-action@v1.0.3
         with:
@@ -48,5 +50,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
+            nginx -t
             systemctl reload nginx
             echo "Deploy complete!"

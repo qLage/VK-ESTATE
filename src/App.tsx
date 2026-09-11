@@ -7,6 +7,7 @@ import { CookieConsent } from "@/components/sections/CookieConsent";
 import { ReferralModal } from "@/components/sections/ReferralModal";
 import Index from "@/pages/Index";
 import CatalogPage from "@/pages/CatalogPage";
+import PropertyPage from "@/pages/PropertyPage";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index onOpenForm={() => setFormOpen(true)} />} />
         <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:id" element={<PropertyPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/offer" element={<OfferPage />} />
