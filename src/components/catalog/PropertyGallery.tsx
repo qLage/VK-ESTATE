@@ -40,7 +40,7 @@ export function PropertyGallery({ photos, alt, activeIndex, onChange }: Property
 
   return (
     <div className="space-y-3">
-      <div className="relative overflow-hidden rounded-2xl md:rounded-[1.5rem] bg-zinc-800 aspect-[16/10]">
+      <div className="relative overflow-hidden rounded-2xl bg-zinc-800 h-[220px] sm:h-[260px] lg:h-[300px]">
         <LazyImage
           src={current}
           alt={alt}
@@ -87,7 +87,7 @@ export function PropertyGallery({ photos, alt, activeIndex, onChange }: Property
               type="button"
               data-thumb={index}
               onClick={() => onChange(index)}
-              className={`relative shrink-0 overflow-hidden rounded-xl h-16 w-20 sm:h-[72px] sm:w-24 border transition-all ${
+              className={`relative shrink-0 overflow-hidden rounded-lg h-12 w-16 sm:h-14 sm:w-[4.5rem] border transition-all ${
                 index === activeIndex ? "border-primary ring-1 ring-primary/40" : "border-white/10 opacity-70 hover:opacity-100"
               }`}
             >

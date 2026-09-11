@@ -83,7 +83,7 @@ export default function PropertyPage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-12 md:pt-32 md:pb-20">
       <div className="px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <ScrollReveal className="flex items-center justify-between gap-4 mb-8" direction="up">
             <Link to="/catalog">
               <Button variant="outline" size="sm">
@@ -96,7 +96,7 @@ export default function PropertyPage() {
             </Badge>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.8fr] gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-5 lg:gap-8 items-start">
             <PropertyGallery
               photos={photos}
               alt={title}

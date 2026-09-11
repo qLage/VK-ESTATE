@@ -23,7 +23,7 @@ export function PropertyMap(props: PropertyMapProps) {
       <iframe
         title="Карта объекта"
         src={src}
-        className="w-full h-[280px] sm:h-[360px] lg:h-[420px] border-0"
+        className="w-full h-[220px] sm:h-[260px] border-0"
         loading="lazy"
         allowFullScreen
       />
