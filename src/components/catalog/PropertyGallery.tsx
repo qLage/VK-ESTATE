@@ -53,56 +53,51 @@ export function PropertyGallery({ photos, alt, activeIndex, onChange }: Property
     };
   }, [viewerOpen]);
 
-  const arrows = total > 1 && (
-    <>
-      <button
-        type="button"
-        aria-label="Предыдущее фото"
-        onClick={(event) => {
-          event.stopPropagation();
-          go(activeIndex - 1);
-        }}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-black/55 border border-white/10 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        type="button"
-        aria-label="Следующее фото"
-        onClick={(event) => {
-          event.stopPropagation();
-          go(activeIndex + 1);
-        }}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-black/55 border border-white/10 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </>
-  );
-
   return (
     <div className="space-y-3">
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={() => setViewerOpen(true)}
-        onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            setViewerOpen(true);
-          }
-        }}
-        className="relative mx-auto w-fit max-w-full overflow-hidden rounded-2xl bg-zinc-900 h-[240px] sm:h-[320px] lg:h-[400px] cursor-zoom-in"
-        aria-label="Открыть фото"
-      >
-        <LazyImage
-          src={current}
-          alt={alt}
-          placeholder={PLACEHOLDER_IMAGE}
-          className="h-full w-auto max-w-full object-contain"
-          loading="eager"
-        />
-        {arrows}
+      <div className="relative w-full h-[240px] sm:h-[320px] lg:h-[400px]">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setViewerOpen(true)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setViewerOpen(true);
+            }
+          }}
+          className="absolute inset-y-0 left-12 right-12 flex items-center justify-center cursor-zoom-in"
+          aria-label="Открыть фото"
+        >
+          <LazyImage
+            src={current}
+            alt={alt}
+            placeholder={PLACEHOLDER_IMAGE}
+            className="max-h-full max-w-full w-auto h-auto object-contain rounded-2xl"
+            loading="eager"
+          />
+        </div>
+
+        {total > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Предыдущее фото"
+              onClick={() => go(activeIndex - 1)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-black/55 border border-white/10 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Следующее фото"
+              onClick={() => go(activeIndex + 1)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-black/55 border border-white/10 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
       </div>
 
       {total > 0 && (
