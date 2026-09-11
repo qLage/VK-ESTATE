@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { Modal } from "@/components/ui/modal";
 import { Users, Home, KeyRound, Landmark, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -48,7 +49,14 @@ function formatPhone(value: string): string {
   return result;
 }
 
+const REFERRAL_DISMISSED_KEY = "vkrysha_referral_dismissed";
+
+function isPropertyPage(pathname: string): boolean {
+  return /^\/catalog\/[^/]+/.test(pathname);
+}
+
 export function ReferralModal() {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -62,11 +70,16 @@ export function ReferralModal() {
   });
 
   useEffect(() => {
+    if (isPropertyPage(location.pathname) || sessionStorage.getItem(REFERRAL_DISMISSED_KEY)) {
+      setOpen(false);
+      return;
+    }
     const timer = setTimeout(() => setOpen(true), 1500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname]);
 
   const handleClose = () => {
+    sessionStorage.setItem(REFERRAL_DISMISSED_KEY, "1");
     setOpen(false);
   };
 

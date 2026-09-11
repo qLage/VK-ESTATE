@@ -10,8 +10,10 @@ import type { CatalogPhoto } from "@/lib/api";
 import {
   formatArea,
   formatFloor,
+  formatHouseType,
   formatPrice,
   formatPricePerMeter,
+  formatRenovation,
   formatRooms,
   getCategoryMeta,
   makeTitle,
@@ -77,6 +79,8 @@ export default function PropertyPage() {
   const location = [property.city, property.address].filter(Boolean).join(", ") || "Адрес уточняется";
   const video = property.videoUrl || property.video;
   const tour = property.tour3dUrl || property.tour3d;
+  const renovation = formatRenovation(property.renovation);
+  const houseType = formatHouseType(property.houseType);
   const lat = property.lat ?? property.coordinates?.lat ?? property.coordinates?.latitude;
   const lng = property.lng ?? property.coordinates?.lng ?? property.coordinates?.longitude;
 
@@ -141,10 +145,10 @@ export default function PropertyPage() {
                 </div>
               </div>
 
-              {(property.renovation || property.houseType || property.cadastral) && (
+              {(renovation || houseType || property.cadastral) && (
                 <div className="space-y-2 text-sm text-white/60">
-                  {property.renovation && <p>Ремонт: {property.renovation}</p>}
-                  {property.houseType && <p>Тип дома: {property.houseType}</p>}
+                  {renovation && <p>Ремонт: {renovation}</p>}
+                  {houseType && <p>Тип дома: {houseType}</p>}
                   {property.cadastral && <p>Кадастр: {property.cadastral}</p>}
                 </div>
               )}

@@ -100,6 +100,44 @@ export function formatFloor(
   return `${floor}/${floorsTotal}`;
 }
 
+const RENOVATION_LABELS: Record<string, string> = {
+  requires: "Требует ремонта",
+  euro: "Евроремонт",
+  cosmetic: "Косметический",
+  designer: "Дизайнерский",
+  good: "Хороший",
+  excellent: "Отличный",
+  none: "Без ремонта",
+  rough: "Черновая отделка",
+  finishing: "Чистовая отделка",
+  capital: "Капитальный",
+};
+
+const HOUSE_TYPE_LABELS: Record<string, string> = {
+  brick: "Кирпичный",
+  monolith: "Монолитный",
+  panel: "Панельный",
+  block: "Блочный",
+  "monolith-brick": "Монолитно-кирпичный",
+  wood: "Деревянный",
+  wooden: "Деревянный",
+  frame: "Каркасный",
+};
+
+function formatCrmLabel(value: string | null | undefined, map: Record<string, string>): string | null {
+  if (!value) return null;
+  const key = value.trim().toLowerCase().replace(/[\s_]+/g, "-");
+  return map[key] || value;
+}
+
+export function formatRenovation(value: string | null | undefined): string | null {
+  return formatCrmLabel(value, RENOVATION_LABELS);
+}
+
+export function formatHouseType(value: string | null | undefined): string | null {
+  return formatCrmLabel(value, HOUSE_TYPE_LABELS);
+}
+
 export function makeTitle(
   area: number | null | undefined,
   rooms: string | null | undefined,
