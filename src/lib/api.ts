@@ -248,6 +248,14 @@ class SiteAPIClient {
     );
     return res.data || { album: {} as ApiGalleryAlbum, photos: [] };
   }
+
+  async getSiteProfile(): Promise<unknown> {
+    return this.request<unknown>("/settings/site-profile");
+  }
+
+  async getBranding(): Promise<unknown> {
+    return this.request<unknown>("/settings/branding");
+  }
 }
 
 export const siteAPI = new SiteAPIClient();

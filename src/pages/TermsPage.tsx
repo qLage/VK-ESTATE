@@ -1,15 +1,20 @@
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { useSite } from "@/hooks/useSite";
+import { operatorRequisites, primaryEmail } from "@/lib/site";
 
 export default function TermsPage() {
+  const { profile } = useSite();
+  const email = primaryEmail(profile) || "info@vkrysha.ru";
+  const operator = operatorRequisites(profile);
+
   return (
     <LegalLayout title="Пользовательское соглашение" updatedDate="04 июня 2026 г.">
       <section>
         <h2 className="text-lg font-bold text-white mb-3">1. Общие положения</h2>
         <p>
-          Настоящее Пользовательское соглашение (далее — Соглашение) регулирует отношения между 
-          Индивидуальный предприниматель Матвеева Ангелина Владимировна (ОГРНИП: 323366800066581, ИНН: 366112052029, адрес: 394000, г. Воронеж,
-          ул. Донбасская, д. 25К2, кв. 168) (далее — Администрация) и пользователем сети Интернет 
-          (далее — Пользователь) по использованию сайта <strong>vkrysha-estate.ru</strong> (далее — Сайт).
+          Настоящее Пользовательское соглашение (далее — Соглашение) регулирует отношения между{" "}
+          {operator} (далее — Администрация) и пользователем сети Интернет 
+          (далее — Пользователь) по использованию сайта <strong>vkrysha.ru</strong> (далее — Сайт).
         </p>
         <p className="mt-2">
           Использование Сайта означает полное и безоговорочное принятие Пользователем настоящего 
@@ -108,7 +113,7 @@ export default function TermsPage() {
         </p>
         <p className="mt-2">
           По всем вопросам, связанным с настоящим Соглашением, Пользователь может обратиться 
-          по адресу электронной почты: <strong>boyarova.angelina.rieltor@mail.ru</strong>.
+          по адресу электронной почты: <strong>{email}</strong>.
         </p>
       </section>
     </LegalLayout>

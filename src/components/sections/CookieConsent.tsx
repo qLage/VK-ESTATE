@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { X, Cookie, Settings2 } from "lucide-react";
+import { useSite } from "@/hooks/useSite";
+import { isInternalLink } from "@/lib/site";
 
 const COOKIE_CONSENT_KEY = "vkrysha_cookie_consent";
 
@@ -14,6 +16,8 @@ export function CookieConsent() {
   const [showSettings, setShowSettings] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
+  const { profile } = useSite();
+  const cookiesHref = profile.legalLinks.cookies;
 
   const acceptAll = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ consent: "all", date: new Date().toISOString() }));
@@ -59,9 +63,16 @@ export function CookieConsent() {
                     Сайт использует файлы cookie для улучшения работы и персонализации контента.
                     Вы можете настроить использование cookie или принять все.
                     Подробнее в{" "}
-                    <Link to="/cookies" className="text-primary/60 hover:text-primary underline underline-offset-2">
-                      Политике использования cookie
-                    </Link>.
+                    {isInternalLink(cookiesHref) ? (
+                      <Link to={cookiesHref} className="text-primary/60 hover:text-primary underline underline-offset-2">
+                        Политике использования cookie
+                      </Link>
+                    ) : (
+                      <a href={cookiesHref} className="text-primary/60 hover:text-primary underline underline-offset-2">
+                        Политике использования cookie
+                      </a>
+                    )}
+                    .
                   </p>
                 </div>
               </div>

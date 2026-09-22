@@ -1,12 +1,48 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { useSite } from "@/hooks/useSite";
+import { mailtoHref, primaryAddress, primaryEmail, primaryPhone, telHref } from "@/lib/site";
 
 interface CTAProps {
   onOpenForm: () => void;
 }
 
 export function CTA({ onOpenForm }: CTAProps) {
+  const { profile } = useSite();
+  const phone = primaryPhone(profile);
+  const email = primaryEmail(profile);
+  const office = primaryAddress(profile);
+
+  const cards = [
+    phone && {
+      icon: Phone,
+      label: "Телефон",
+      value: phone,
+      description: profile.workingHours || "На связи в рабочее время",
+      href: telHref(phone),
+    },
+    email && {
+      icon: Mail,
+      label: "Email",
+      value: email,
+      description: "Ответим в течение часа",
+      href: mailtoHref(email),
+    },
+    office && {
+      icon: MapPin,
+      label: office.label || "Офис",
+      value: office.address,
+      description: profile.workingHours || "По предварительной записи",
+      href: `https://yandex.ru/maps/?text=${encodeURIComponent(office.address)}`,
+    },
+  ].filter(Boolean) as {
+    icon: typeof Phone;
+    label: string;
+    value: string;
+    description: string;
+    href: string;
+  }[];
   return (
     <section id="contacts" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -46,41 +82,21 @@ export function CTA({ onOpenForm }: CTAProps) {
                     <Button variant="gradient" size="lg" onClick={onOpenForm}>
                       Оставить заявку <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>
-                    <a href="tel:+7XXXXXXXXXX">
-                      <Button variant="outline" size="lg">
-                        <Phone className="w-3.5 h-3.5 mr-1.5" />
-                        Позвонить
-                      </Button>
-                    </a>
+                    {phone && (
+                      <a href={telHref(phone)}>
+                        <Button variant="outline" size="lg">
+                          <Phone className="w-3.5 h-3.5 mr-1.5" />
+                          Позвонить
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               </ScrollReveal>
 
               {/* Right Info Cards */}
               <div className="space-y-3 md:space-y-4">
-                {[
-                  {
-                    icon: Phone,
-                    label: "Телефон",
-                    value: "+7 (XXX) XXX-XX-XX",
-                    description: "Пн–Пт 9:00–20:00",
-                    href: "tel:+7XXXXXXXXXX",
-                  },
-                  {
-                    icon: Mail,
-                    label: "Email",
-                    value: "boyarova.angelina.rieltor@mail.ru",
-                    description: "Ответим в течение часа",
-                    href: "mailto:boyarova.angelina.rieltor@mail.ru",
-                  },
-                  {
-                    icon: MapPin,
-                    label: "Офис",
-                    value: "Воронеж, ул. Донбасская, 25К2",
-                    description: "Ежедневно 9:00 — 20:00",
-                    href: "#",
-                  },
-                ].map((item, index) => (
+                {cards.map((item, index) => (
                   <ScrollReveal key={item.label} delay={index * 0.1} direction="right">
                     <a
                       href={item.href}

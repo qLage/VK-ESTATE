@@ -9,6 +9,7 @@ import Index from "@/pages/Index";
 import CatalogPage from "@/pages/CatalogPage";
 import PropertyPage from "@/pages/PropertyPage";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SiteProvider } from "@/hooks/useSite";
 import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
 import OfferPage from "@/pages/OfferPage";
@@ -18,23 +19,25 @@ function App() {
   const [formOpen, setFormOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <ScrollToTop />
-      <Navbar onOpenForm={() => setFormOpen(true)} />
-      <Routes>
-        <Route path="/" element={<Index onOpenForm={() => setFormOpen(true)} />} />
-        <Route path="/catalog" element={<CatalogPage />} />
-        <Route path="/catalog/:id" element={<PropertyPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/offer" element={<OfferPage />} />
-        <Route path="/cookies" element={<CookiesPage />} />
-      </Routes>
-      <Footer />
-      <ContactForm open={formOpen} onClose={() => setFormOpen(false)} />
-      <CookieConsent />
-      <ReferralModal />
-    </div>
+    <SiteProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <ScrollToTop />
+        <Navbar onOpenForm={() => setFormOpen(true)} />
+        <Routes>
+          <Route path="/" element={<Index onOpenForm={() => setFormOpen(true)} />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/catalog/:id" element={<PropertyPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/offer" element={<OfferPage />} />
+          <Route path="/cookies" element={<CookiesPage />} />
+        </Routes>
+        <Footer />
+        <ContactForm open={formOpen} onClose={() => setFormOpen(false)} />
+        <CookieConsent />
+        <ReferralModal />
+      </div>
+    </SiteProvider>
   );
 }
 

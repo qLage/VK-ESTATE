@@ -1,16 +1,21 @@
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { useSite } from "@/hooks/useSite";
+import { operatorRequisites, primaryEmail } from "@/lib/site";
 
 export default function PrivacyPage() {
+  const { profile } = useSite();
+  const email = primaryEmail(profile) || "info@vkrysha.ru";
+  const operator = operatorRequisites(profile);
+
   return (
     <LegalLayout title="Политика конфиденциальности" updatedDate="04 июня 2026 г.">
       <section>
         <h2 className="text-lg font-bold text-white mb-3">1. Общие положения</h2>
         <p>
           Настоящая Политика конфиденциальности персональных данных (далее — Политика) 
-          действует в отношении всей информации, которую Индивидуальный предприниматель Матвеева Ангелина Владимировна (ОГРНИП: 323366800066581, 
-          ИНН: 366112052029, адрес: 394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168) 
+          действует в отношении всей информации, которую {operator}{" "}
           (далее — Оператор) может получить о Пользователе во время использования сайта 
-          <strong> vkrysha-estate.ru</strong> (далее — Сайт).
+          <strong> vkrysha.ru</strong> (далее — Сайт).
         </p>
         <p className="mt-2">
           Использование Сайта означает безоговорочное согласие Пользователя с настоящей Политикой 
@@ -84,11 +89,11 @@ export default function PrivacyPage() {
             третьим лицам для исполнения обязательств по гражданско-правовому договору.</li>
           <li>В случае выявления неточностей в персональных данных, Пользователь может актуализировать 
             их, направив Оператору уведомление с помощью электронной почты на адрес 
-            <strong>boyarova.angelina.rieltor@mail.ru</strong> с пометкой «Актуализация персональных данных».</li>
+            <strong>{email}</strong> с пометкой «Актуализация персональных данных».</li>
           <li>Срок обработки персональных данных определяется достижением целей, для которых были 
             собраны персональные данные, если иной срок не предусмотрен договором или законодательством. 
             Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, 
-            направив Оператору уведомление на электронный адрес <strong>boyarova.angelina.rieltor@mail.ru</strong>.</li>
+            направив Оператору уведомление на электронный адрес <strong>{email}</strong>.</li>
         </ul>
       </section>
 
@@ -110,7 +115,7 @@ export default function PrivacyPage() {
         <p>
           Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки 
           его персональных данных, обратившись к Оператору с помощью электронной почты 
-          <strong>boyarova.angelina.rieltor@mail.ru</strong>.
+          <strong>{email}</strong>.
         </p>
         <p className="mt-2">
           В данном документе будут отражены любые изменения политики обработки персональных данных 
@@ -118,7 +123,7 @@ export default function PrivacyPage() {
         </p>
         <p className="mt-2">
           Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу 
-          <strong> https://vkrysha-estate.ru/privacy</strong>.
+          <strong> https://vkrysha.ru/privacy</strong>.
         </p>
       </section>
     </LegalLayout>

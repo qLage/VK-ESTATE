@@ -1,14 +1,19 @@
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { useSite } from "@/hooks/useSite";
+import { operatorRequisites, primaryAddress, primaryEmail } from "@/lib/site";
 
 export default function OfferPage() {
+  const { profile } = useSite();
+  const email = primaryEmail(profile) || "info@vkrysha.ru";
+  const office = primaryAddress(profile);
+
   return (
     <LegalLayout title="Договор публичной оферты" updatedDate="04 июня 2026 г.">
       <section>
         <h2 className="text-lg font-bold text-white mb-3">1. Общие положения</h2>
         <p>
-          Настоящий документ является публичной офертой (предложением) индивидуального 
-          предпринимателя Матвеевой Ангелины Владимировны (ОГРНИП: 323366800066581, ИНН: 366112052029, 
-          адрес: 394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168) (далее — Исполнитель) и содержит все существенные условия договора об оказании 
+          Настоящий документ является публичной офертой (предложением) {operatorRequisites(profile)}{" "}
+          (далее — Исполнитель) и содержит все существенные условия договора об оказании 
           риэлторских услуг (далее — Договор).
         </p>
         <p className="mt-2">
@@ -126,10 +131,10 @@ export default function OfferPage() {
       <section>
         <h2 className="text-lg font-bold text-white mb-3">7. Реквизиты Исполнителя</h2>
         <div className="bg-white/[0.03] border border-white/5 rounded-xl p-4 md:p-5 space-y-1.5 text-sm">
-          <p><span className="text-white/40">Полное наименование:</span> <span className="text-white">Индивидуальный предприниматель Матвеева Ангелина Владимировна</span></p>
-          <p><span className="text-white/40">ИНН:</span> <span className="text-white">366112052029</span></p>
-          <p><span className="text-white/40">ОГРНИП:</span> <span className="text-white">323366800066581</span></p>
-          <p><span className="text-white/40">Юридический адрес:</span> <span className="text-white">394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168</span></p>
+          <p><span className="text-white/40">Полное наименование:</span> <span className="text-white">{profile.legalName}</span></p>
+          {profile.inn && <p><span className="text-white/40">ИНН:</span> <span className="text-white">{profile.inn}</span></p>}
+          {profile.ogrnip && <p><span className="text-white/40">ОГРНИП:</span> <span className="text-white">{profile.ogrnip}</span></p>}
+          {office && <p><span className="text-white/40">Юридический адрес:</span> <span className="text-white">{office.address}</span></p>}
           <p><span className="text-white/40">Расчётный счёт:</span> <span className="text-white">40802810113000104947</span></p>
           <p><span className="text-white/40">Банк:</span> <span className="text-white">ПАО Сбербанк, г. Воронеж</span></p>
           <p><span className="text-white/40">БИК:</span> <span className="text-white">042007681</span></p>
@@ -139,7 +144,7 @@ export default function OfferPage() {
           <p><span className="text-white/40">Система налогообложения:</span> <span className="text-white">УСН 6%</span></p>
           <p><span className="text-white/40">Дата открытия счёта:</span> <span className="text-white">25.07.2023</span></p>
           <p><span className="text-white/40">Адрес подразделения:</span> <span className="text-white">г. Воронеж, ул. Кольцовская, 46</span></p>
-          <p><span className="text-white/40">E-mail:</span> <span className="text-white">boyarova.angelina.rieltor@mail.ru</span></p>
+          <p><span className="text-white/40">E-mail:</span> <span className="text-white">{email}</span></p>
         </div>
       </section>
     </LegalLayout>

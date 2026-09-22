@@ -1,14 +1,20 @@
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { useSite } from "@/hooks/useSite";
+import { primaryEmail, primaryPhone } from "@/lib/site";
 
 export default function CookiesPage() {
+  const { profile } = useSite();
+  const email = primaryEmail(profile);
+  const phone = primaryPhone(profile);
+
   return (
     <LegalLayout title="Политика использования cookie" updatedDate="04 июня 2026 г.">
       <section>
         <h2 className="text-lg font-bold text-white mb-3">1. Общие положения</h2>
         <p>
           Настоящая Политика использования файлов cookie (далее — Политика) является неотъемлемой 
-          частью Политики конфиденциальности ИП Матвеева Ангелина Владимировна и регулирует порядок использования 
-          файлов cookie и схожих технологий на сайте <strong>vkrysha-estate.ru</strong> (далее — Сайт).
+          частью Политики конфиденциальности {profile.legalName} и регулирует порядок использования 
+          файлов cookie и схожих технологий на сайте <strong>vkrysha.ru</strong> (далее — Сайт).
         </p>
         <p className="mt-2">
           Используя Сайт, Пользователь соглашается с применением файлов cookie в соответствии 
@@ -107,8 +113,8 @@ export default function CookiesPage() {
         <h2 className="text-lg font-bold text-white mb-3">7. Контактная информация</h2>
         <p>
           По всем вопросам, связанным с использованием файлов cookie, Пользователь может обратиться 
-          по адресу электронной почты: <strong>boyarova.angelina.rieltor@mail.ru</strong> или по телефону 
-          <strong>+7 (XXX) XXX-XX-XX</strong>.
+          по адресу электронной почты: <strong>{email}</strong>
+          {phone ? <> или по телефону <strong>{phone}</strong></> : null}.
         </p>
       </section>
     </LegalLayout>

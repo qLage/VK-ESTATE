@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useSite } from "@/hooks/useSite";
+import { displayName, primaryPhone, telHref } from "@/lib/site";
 
 const navLinks = [
   { label: "Каталог", to: "/catalog", section: "catalog" },
@@ -20,6 +22,9 @@ export function Navbar({ onOpenForm }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const activeSection = useActiveSection();
+  const { profile, branding } = useSite();
+  const phone = primaryPhone(profile);
+  const name = displayName(profile, branding);
 
   const scrollToSection = (id: string) => {
     setOpen(false);
@@ -36,7 +41,11 @@ export function Navbar({ onOpenForm }: NavbarProps) {
         <div className="relative flex items-center justify-between px-4 sm:px-6 md:px-8 h-14 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-2xl border border-white/5 shadow-2xl">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 md:gap-3">
-            <img src="/logo-panel.svg" alt="Ваша Крыша" className="h-5 sm:h-6 md:h-7 w-auto" />
+            {branding.logoPanelEnabled ? (
+              <img src={branding.logoPanelUrl} alt={name} className="h-5 sm:h-6 md:h-7 w-auto" />
+            ) : (
+              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-white">{name}</span>
+            )}
           </Link>
 
           {/* Desktop Links */}
@@ -77,10 +86,12 @@ export function Navbar({ onOpenForm }: NavbarProps) {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="tel:+7XXXXXXXXXX" className="flex items-center gap-2 text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-primary transition-colors">
-              <Phone className="w-3.5 h-3.5" />
-              <span>+7 (XXX) XXX-XX-XX</span>
-            </a>
+            {phone && (
+              <a href={telHref(phone)} className="flex items-center gap-2 text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-primary transition-colors">
+                <Phone className="w-3.5 h-3.5" />
+                <span>{phone}</span>
+              </a>
+            )}
             <Button size="sm" variant="gradient" onClick={onOpenForm}>
               Подобрать жильё
             </Button>
@@ -129,13 +140,15 @@ export function Navbar({ onOpenForm }: NavbarProps) {
               );
             })}
             <div className="pt-2 border-t border-white/5 space-y-2">
-              <a
-                href="tel:+7XXXXXXXXXX"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest text-white/50 hover:text-white hover:bg-white/5 transition-all"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                +7 (XXX) XXX-XX-XX
-              </a>
+              {phone && (
+                <a
+                  href={telHref(phone)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest text-white/50 hover:text-white hover:bg-white/5 transition-all"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  {phone}
+                </a>
+              )}
               <Button className="w-full" variant="gradient" onClick={() => { setOpen(false); onOpenForm(); }}>
                 Подобрать жильё
               </Button>

@@ -12,6 +12,7 @@ import {
   Percent,
 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useSite } from "@/hooks/useSite";
 
 const TAGS = [
   { label: "Квартиры", category: "apartment_sell" },
@@ -195,6 +196,9 @@ function HeroTags() {
 }
 
 function HeroVisual() {
+  const { branding } = useSite();
+  const name = branding.companyName;
+
   return (
     <div className="relative hidden lg:block">
       <div className="relative aspect-square max-w-lg mx-auto">
@@ -219,8 +223,8 @@ function HeroVisual() {
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-[2.5rem] bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-2xl flex flex-col items-center justify-center p-8 animate-float">
             <img
-              src="/logo.svg"
-              alt="Ваша Крыша"
+              src={branding.logoUrl}
+              alt={name}
               className="w-32 h-32 md:w-40 md:h-40 object-contain opacity-80"
             />
             <div className="mt-4 flex items-center gap-2">
