@@ -138,6 +138,20 @@ export function formatHouseType(value: string | null | undefined): string | null
   return formatCrmLabel(value, HOUSE_TYPE_LABELS);
 }
 
+/** Public address without apartment / entrance / floor details. */
+export function publicAddress(address: string | null | undefined): string | null {
+  if (!address) return null;
+  let value = address
+    .replace(/(?:,\s*)?(?:кв(?:артира)?\.?\s*№?\s*\d+[а-яa-z]?)/gi, "")
+    .replace(/(?:,\s*)?(?:подъезд\.?\s*№?\s*\d+)/gi, "")
+    .replace(/(?:,\s*)?(?:этаж\.?\s*№?\s*\d+)/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s*,\s*,+/g, ",")
+    .replace(/^[\s,]+|[\s,]+$/g, "")
+    .trim();
+  return value || null;
+}
+
 export function makeTitle(
   area: number | null | undefined,
   rooms: string | null | undefined,

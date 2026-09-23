@@ -13,6 +13,7 @@ import {
   getCategoryMeta,
   makeTitle,
   propertyArea,
+  publicAddress,
 } from "@/lib/property";
 import { BedDouble, Building, Heart, MapPin, Maximize } from "lucide-react";
 
@@ -32,7 +33,7 @@ export function PropertyCard({
   const meta = getCategoryMeta(property.category);
   const area = propertyArea(property);
   const title = makeTitle(area, property.rooms, property.category);
-  const location = property.address || property.city || "Адрес уточняется";
+  const location = publicAddress(property.address) || property.city || "Адрес уточняется";
 
   return (
     <Link to={`/catalog/${property.id}`} className="block h-full">

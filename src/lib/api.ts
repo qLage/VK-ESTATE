@@ -48,7 +48,6 @@ export interface CatalogProperty {
   lng?: number | null;
   renovation?: string | null;
   houseType?: string | null;
-  cadastral?: string | null;
   video?: string | null;
   videoUrl?: string | null;
   tour3d?: string | null;
@@ -141,7 +140,6 @@ export function normalizeCatalogProperty(raw: unknown): CatalogProperty {
     lng,
     renovation: pick<string>(row, "renovation") || null,
     houseType: pick<string>(row, "houseType", "house_type") || null,
-    cadastral: pick<string>(row, "cadastral", "cadastral_number") || null,
     videoUrl: pick<string>(row, "videoUrl", "video_url", "video") || null,
     tour3dUrl: pick<string>(row, "tour3dUrl", "tour_url3_d", "tour3d") || null,
   };

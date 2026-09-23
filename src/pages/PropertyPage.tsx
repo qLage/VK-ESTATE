@@ -18,6 +18,7 @@ import {
   getCategoryMeta,
   makeTitle,
   propertyArea,
+  publicAddress,
 } from "@/lib/property";
 import {
   ArrowLeft,
@@ -76,7 +77,8 @@ export default function PropertyPage() {
   const meta = getCategoryMeta(property.category);
   const area = propertyArea(property);
   const title = makeTitle(area, property.rooms, property.category);
-  const location = [property.city, property.address].filter(Boolean).join(", ") || "Адрес уточняется";
+  const street = publicAddress(property.address);
+  const location = [property.city, street].filter(Boolean).join(", ") || "Адрес уточняется";
   const video = property.videoUrl || property.video;
   const tour = property.tour3dUrl || property.tour3d;
   const renovation = formatRenovation(property.renovation);
@@ -145,11 +147,10 @@ export default function PropertyPage() {
                 </div>
               </div>
 
-              {(renovation || houseType || property.cadastral) && (
+              {(renovation || houseType) && (
                 <div className="space-y-2 text-sm text-white/60">
                   {renovation && <p>Ремонт: {renovation}</p>}
                   {houseType && <p>Тип дома: {houseType}</p>}
-                  {property.cadastral && <p>Кадастр: {property.cadastral}</p>}
                 </div>
               )}
 
@@ -220,7 +221,7 @@ export default function PropertyPage() {
                 </a>
               ) : null}
             </div>
-            <PropertyMap lat={lat} lng={lng} city={property.city} address={property.address} />
+            <PropertyMap lat={lat} lng={lng} city={property.city} address={street} />
           </ScrollReveal>
 
           {property.description && (
