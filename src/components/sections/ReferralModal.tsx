@@ -74,7 +74,7 @@ export function ReferralModal() {
       setOpen(false);
       return;
     }
-    const timer = setTimeout(() => setOpen(true), 1500);
+    const timer = setTimeout(() => setOpen(true), 8000);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 

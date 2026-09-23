@@ -10,8 +10,8 @@ export function Gallery() {
   return (
     <section id="gallery" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/[0.02] blur-[120px] rounded-full -translate-x-1/4" />
+        <div className="perf-orb absolute top-0 right-0 w-[400px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full translate-x-1/4" />
+        <div className="perf-orb absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/[0.02] blur-[120px] rounded-full -translate-x-1/4" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">

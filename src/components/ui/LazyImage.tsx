@@ -36,8 +36,9 @@ export function LazyImage({
       key={`${displaySrc}-${alt}`}
       src={displaySrc}
       alt={alt}
-      className={`transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+      className={`${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ${className}`}
       loading={loading}
+      decoding="async"
       onLoad={() => setLoaded(true)}
       onError={() => setLoaded(true)}
     />

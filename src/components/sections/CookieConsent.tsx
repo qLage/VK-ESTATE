@@ -50,7 +50,7 @@ export function CookieConsent() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[100] p-3 sm:p-4">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-4 md:p-5">
+        <div className="bg-zinc-900/95 md:backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-4 md:p-5">
           {!showSettings ? (
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="flex items-start gap-3 flex-1">

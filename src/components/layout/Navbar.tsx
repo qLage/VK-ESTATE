@@ -38,7 +38,7 @@ export function Navbar({ onOpenForm }: NavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="mx-3 sm:mx-4 md:mx-6 lg:mx-8 mt-3 sm:mt-4">
-        <div className="relative flex items-center justify-between gap-3 px-3.5 sm:px-6 md:px-8 h-14 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-2xl border border-white/5 shadow-2xl">
+        <div className="relative flex items-center justify-between gap-3 px-3.5 sm:px-6 md:px-8 h-14 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/95 md:bg-zinc-900/60 md:backdrop-blur-2xl border border-white/5 shadow-2xl">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 md:gap-3 min-w-0">
             {branding.logoPanelEnabled ? (
@@ -108,7 +108,7 @@ export function Navbar({ onOpenForm }: NavbarProps) {
 
         {/* Mobile Menu */}
         {open && (
-          <div className="md:hidden mt-2 rounded-2xl bg-zinc-900/90 backdrop-blur-2xl border border-white/5 p-4 space-y-2 animate-fade-in">
+          <div className="md:hidden mt-2 rounded-2xl bg-zinc-900/95 border border-white/5 p-4 space-y-2 animate-fade-in">
             {navLinks.map((link) => {
               const isActive = link.section
                 ? (isHome && activeSection === link.section) || (link.section === "catalog" && isCatalog)

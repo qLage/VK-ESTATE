@@ -37,7 +37,7 @@ export function Stats() {
   return (
     <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] blur-[150px] rounded-full animate-glow-pulse" />
+        <div className="perf-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] blur-[150px] rounded-full animate-glow-pulse" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
@@ -66,7 +66,7 @@ export function Stats() {
                 key={stat.label}
                 delay={index * 0.1}
                 direction="scale"
-                className="group relative p-4 sm:p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 hover-lift"
+                className="group relative p-4 sm:p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/50 md:bg-zinc-900/40 md:backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 hover-lift"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-primary/5 blur-[40px] rounded-full group-hover:bg-primary/10 transition-all duration-700" />
 

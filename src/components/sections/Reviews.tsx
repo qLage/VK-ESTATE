@@ -26,7 +26,7 @@ export function Reviews() {
   return (
     <section id="reviews" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full animate-glow-pulse" />
+        <div className="perf-orb absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full animate-glow-pulse" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
@@ -52,7 +52,7 @@ export function Reviews() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
             {reviews.map((review, index) => (
               <ScrollReveal key={review.name} delay={index * 0.12} direction="scale">
-                <div className="group relative p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 h-full hover-lift">
+                <div className="group relative p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/50 md:bg-zinc-900/40 md:backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 h-full hover-lift">
                   <div className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-primary/5 blur-[30px] rounded-full group-hover:bg-primary/10 transition-all duration-700" />
 
                   <div className="relative z-10 space-y-4 md:space-y-5">

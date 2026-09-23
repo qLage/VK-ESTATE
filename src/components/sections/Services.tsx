@@ -59,7 +59,7 @@ export function Services({ onOpenForm }: ServicesProps) {
   return (
     <section id="services" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-primary/[0.03] blur-[120px] rounded-full translate-x-1/3 animate-glow-pulse" />
+        <div className="perf-orb absolute top-1/3 right-0 w-[500px] h-[500px] bg-primary/[0.03] blur-[120px] rounded-full translate-x-1/3 animate-glow-pulse" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
@@ -90,7 +90,7 @@ export function Services({ onOpenForm }: ServicesProps) {
               <ScrollReveal key={service.title} delay={index * 0.08} direction="up">
                 <button
                   onClick={() => handleClick(service.action)}
-                  className="group relative w-full p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 hover-lift text-left"
+                  className="group relative w-full p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[1.5rem] lg:rounded-[2rem] bg-zinc-900/50 md:bg-zinc-900/40 md:backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 hover-lift text-left"
                 >
                   <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-primary/5 blur-[40px] rounded-full group-hover:bg-primary/10 transition-all duration-700" />
 

@@ -56,7 +56,7 @@ export function Team({ limit }: TeamProps = {}) {
   return (
     <section id="team" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/[0.02] blur-[150px] rounded-full" />
+        <div className="perf-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/[0.02] blur-[150px] rounded-full" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
@@ -114,7 +114,7 @@ export function Team({ limit }: TeamProps = {}) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                   {groups[groupName].map((employee, index) => (
                     <ScrollReveal key={employee.id} delay={index * 0.08} direction="up">
-                      <div className="group relative flex flex-col items-center text-center p-5 md:p-6 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 h-full hover-lift">
+                      <div className="group relative flex flex-col items-center text-center p-5 md:p-6 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/50 md:bg-zinc-900/40 md:backdrop-blur-xl border border-white/5 hover:border-primary/20 transition-all duration-500 h-full hover-lift">
                         <div className="absolute top-0 right-0 w-20 h-20 md:w-24 md:h-24 bg-primary/5 blur-[30px] rounded-full group-hover:bg-primary/10 transition-all duration-700" />
 
                         {/* Avatar */}

@@ -70,6 +70,47 @@
   }
 }
 
+/* Mobile / reduced-motion: kill continuous GPU-heavy effects */
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .animate-glow-pulse,
+  .animate-float {
+    animation: none !important;
+  }
+
+  .hover-lift {
+    will-change: auto;
+    transition: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .perf-orb {
+    filter: none !important;
+    opacity: 0.35;
+  }
+
+  /* Skip painting off-screen sections while scrolling */
+  #catalog,
+  #gallery,
+  #services,
+  #reviews,
+  #contacts,
+  #team {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .glass {
   background: hsl(var(--card) / 0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);

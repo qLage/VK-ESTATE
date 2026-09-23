@@ -16,8 +16,8 @@ export function Catalog({ limit }: CatalogProps = {}) {
   return (
     <section id="catalog" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full -translate-x-1/2" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/[0.02] blur-[120px] rounded-full translate-x-1/4" />
+        <div className="perf-orb absolute top-0 left-0 w-[400px] h-[400px] bg-primary/[0.03] blur-[120px] rounded-full -translate-x-1/2" />
+        <div className="perf-orb absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/[0.02] blur-[120px] rounded-full translate-x-1/4" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
@@ -58,7 +58,7 @@ export function Catalog({ limit }: CatalogProps = {}) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
             {visible.map((property, index) => (
-              <ScrollReveal key={property.id} delay={index * 0.08} direction="up">
+              <ScrollReveal key={property.id} delay={Math.min(index, 3) * 0.05} direction="up">
                 <PropertyCard property={property} index={index} />
               </ScrollReveal>
             ))}

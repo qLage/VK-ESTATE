@@ -46,15 +46,15 @@ export function CTA({ onOpenForm }: CTAProps) {
   return (
     <section id="contacts" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/[0.04] blur-[150px] rounded-full animate-glow-pulse" />
+        <div className="perf-orb absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/[0.04] blur-[150px] rounded-full animate-glow-pulse" />
       </div>
 
       <div className="relative z-10 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl md:rounded-[2.5rem] lg:rounded-[3.5rem] bg-zinc-900/60 backdrop-blur-3xl border border-white/5 shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20">
+          <div className="relative overflow-hidden rounded-3xl md:rounded-[2.5rem] lg:rounded-[3.5rem] bg-zinc-900/90 md:bg-zinc-900/60 md:backdrop-blur-3xl border border-white/5 shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20">
             {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4" />
-            <div className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-primary/[0.03] blur-[100px] rounded-full translate-y-1/3 -translate-x-1/4" />
+            <div className="perf-orb absolute top-0 right-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4" />
+            <div className="perf-orb absolute bottom-0 left-0 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-primary/[0.03] blur-[100px] rounded-full translate-y-1/3 -translate-x-1/4" />
 
             <div className="relative z-10 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Left Content */}

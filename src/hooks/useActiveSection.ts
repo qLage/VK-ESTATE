@@ -10,32 +10,42 @@ export function useActiveSection() {
   const [active, setActive] = useState<string>("");
 
   useEffect(() => {
-    const handleScroll = () => {
+    let rafId = 0;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
       const offset = window.scrollY + 140;
 
       let best = "";
       let bestTop = -Infinity;
 
-      SECTIONS.forEach((id) => {
+      for (const id of SECTIONS) {
         const el = document.getElementById(id);
-        if (!el) return;
+        if (!el) continue;
         const top = getSectionTop(el);
         if (top <= offset && top > bestTop) {
           bestTop = top;
           best = id;
         }
-      });
+      }
 
-      setActive(best);
+      setActive((prev) => (prev === best ? prev : best));
+    };
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      rafId = requestAnimationFrame(update);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Delay initial check to ensure DOM is fully laid out
-    const timeout = setTimeout(handleScroll, 100);
+    const timeout = setTimeout(update, 100);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(timeout);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 

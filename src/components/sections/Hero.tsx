@@ -34,13 +34,13 @@ export function Hero() {
       <div className="absolute inset-0 pointer-events-none">
         <div
           data-parallax="40"
-          className="absolute top-0 right-0 w-[500px] sm:w-[700px] md:w-[900px] h-[500px] sm:h-[700px] md:h-[900px] bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4"
+          className="perf-orb absolute top-0 right-0 w-[500px] sm:w-[700px] md:w-[900px] h-[500px] sm:h-[700px] md:h-[900px] bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4"
         />
         <div
           data-parallax="30"
           data-parallax-invert-x="true"
           data-parallax-invert-y="true"
-          className="absolute bottom-0 left-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/[0.03] blur-[100px] rounded-full"
+          className="perf-orb absolute bottom-0 left-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-primary/[0.03] blur-[100px] rounded-full"
         />
       </div>
 
@@ -97,8 +97,8 @@ function HeroHeading() {
       ref={ref}
       className={`text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter sm:leading-[0.95] uppercase transition-all duration-700 ${
         isRevealed
-          ? "opacity-100 translate-y-0 blur-0"
-          : "opacity-0 translate-y-6 blur-sm"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-6"
       }`}
       style={{
         transitionDelay: "0.2s",
@@ -148,7 +148,7 @@ function HeroSearch() {
   return (
     <div
       ref={ref}
-      className={`relative w-full md:max-w-xl p-2 sm:p-2.5 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-700 ${
+      className={`relative w-full md:max-w-xl p-2 sm:p-2.5 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/90 md:bg-zinc-900/60 md:backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-700 ${
         isRevealed
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-4 scale-[0.98]"

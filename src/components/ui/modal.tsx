@@ -17,7 +17,7 @@ export function Modal({ open, onClose, children, title }: ModalProps) {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-md rounded-3xl bg-zinc-900/90 backdrop-blur-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-in">
+      <div className="relative w-full max-w-md rounded-3xl bg-zinc-900/95 md:bg-zinc-900/90 md:backdrop-blur-3xl border border-white/10 shadow-2xl p-6 md:p-8 animate-scale-in">
         <div className="flex items-center justify-between mb-6">
           {title && (
             <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tight">

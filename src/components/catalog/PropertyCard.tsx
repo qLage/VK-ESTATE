@@ -37,7 +37,7 @@ export function PropertyCard({
 
   return (
     <Link to={`/catalog/${property.id}`} className="block h-full">
-      <Card className="group flex flex-col overflow-hidden bg-zinc-900/40 border-white/5 hover:border-primary/20 rounded-2xl md:rounded-[1.5rem] min-h-[400px] sm:h-[440px] md:h-[460px] hover-lift transition-all duration-500">
+      <Card className="group flex flex-col overflow-hidden bg-zinc-900/50 md:bg-zinc-900/40 border-white/5 hover:border-primary/20 rounded-2xl md:rounded-[1.5rem] min-h-[400px] sm:h-[440px] md:h-[460px] md:hover-lift transition-colors duration-300">
         <div className="relative h-[210px] sm:h-[220px] flex-shrink-0 overflow-hidden bg-zinc-800">
           <LazyImage
             src={property.coverUrl}
@@ -48,7 +48,7 @@ export function PropertyCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-            <Badge variant="outline" className="bg-black/40 backdrop-blur-md border-white/10">
+            <Badge variant="outline" className="bg-black/60 border-white/10">
               {meta.tag}
             </Badge>
           </div>
@@ -59,7 +59,7 @@ export function PropertyCard({
               event.stopPropagation();
               onToggleFavorite?.(property.id);
             }}
-            className={`absolute top-3 right-3 h-8 w-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${
+            className={`absolute top-3 right-3 h-8 w-8 rounded-full bg-black/60 border border-white/10 flex items-center justify-center transition-colors active:scale-95 ${
               favorite ? "text-red-500 border-red-500/30" : "text-white/50 hover:text-primary hover:border-primary/30"
             }`}
           >
