@@ -11,10 +11,19 @@ export default function CatalogPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const activeCategory = searchParams.get("category") || "all";
+  const city = searchParams.get("city") || undefined;
   const { properties, loading, loadingMore, hasMore, loadMore } = useCatalog({
     limit: 12,
     category: activeCategory,
+    city,
   });
+
+  const setCategory = (key: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (key === "all") next.delete("category");
+    else next.set("category", key);
+    setSearchParams(next);
+  };
 
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => {
@@ -51,33 +60,29 @@ export default function CatalogPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1} direction="up">
-            <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-10">
-              <div className="flex items-center gap-2 mr-2">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-primary/60" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-primary/60">Фильтр</span>
+            <div className="-mx-4 px-4 sm:mx-0 sm:px-0 mb-8 md:mb-10">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <div className="flex items-center gap-2 mr-1 shrink-0">
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-primary/60" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-primary/60">Фильтр</span>
+                </div>
+                {FILTER_CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.key}
+                    onClick={() => setCategory(cat.key)}
+                    className={`shrink-0 px-3.5 py-2.5 md:px-4 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
+                      activeCategory === cat.key
+                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                        : "bg-white/[0.03] border border-white/5 text-white/30 hover:text-primary hover:border-primary/20 hover:bg-primary/5"
+                    }`}
+                  >
+                    {cat.label}
+                    {activeCategory === cat.key && cat.key !== "all" && (
+                      <X className="w-3 h-3 ml-1 inline" />
+                    )}
+                  </button>
+                ))}
               </div>
-              {FILTER_CATEGORIES.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => {
-                    if (cat.key === "all") {
-                      setSearchParams({});
-                    } else {
-                      setSearchParams({ category: cat.key });
-                    }
-                  }}
-                  className={`px-3 md:px-4 py-2 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
-                    activeCategory === cat.key
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                      : "bg-white/[0.03] border border-white/5 text-white/30 hover:text-primary hover:border-primary/20 hover:bg-primary/5"
-                  }`}
-                >
-                  {cat.label}
-                  {activeCategory === cat.key && cat.key !== "all" && (
-                    <X className="w-3 h-3 ml-1 inline" />
-                  )}
-                </button>
-              ))}
             </div>
           </ScrollReveal>
 

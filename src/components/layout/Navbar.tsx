@@ -38,13 +38,13 @@ export function Navbar({ onOpenForm }: NavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="mx-3 sm:mx-4 md:mx-6 lg:mx-8 mt-3 sm:mt-4">
-        <div className="relative flex items-center justify-between px-4 sm:px-6 md:px-8 h-14 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-2xl border border-white/5 shadow-2xl">
+        <div className="relative flex items-center justify-between gap-3 px-3.5 sm:px-6 md:px-8 h-14 md:h-16 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-2xl border border-white/5 shadow-2xl">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3">
+          <Link to="/" className="flex items-center gap-2 md:gap-3 min-w-0">
             {branding.logoPanelEnabled ? (
-              <img src={branding.logoPanelUrl} alt={name} className="h-5 sm:h-6 md:h-7 w-auto" />
+              <img src={branding.logoPanelUrl} alt={name} className="h-5 sm:h-6 md:h-7 w-auto max-w-[140px] sm:max-w-none object-contain" />
             ) : (
-              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-white">{name}</span>
+              <span className="text-xs md:text-sm font-black uppercase tracking-widest text-white truncate">{name}</span>
             )}
           </Link>
 

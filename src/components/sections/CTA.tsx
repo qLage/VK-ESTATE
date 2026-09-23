@@ -109,7 +109,7 @@ export function CTA({ onOpenForm }: CTAProps) {
                         <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary/60 mb-0.5">
                           {item.label}
                         </p>
-                        <p className="text-sm md:text-base font-bold text-white">{item.value}</p>
+                        <p className="text-sm md:text-base font-bold text-white break-words">{item.value}</p>
                         <p className="text-[10px] text-white/20">{item.description}</p>
                       </div>
                     </a>

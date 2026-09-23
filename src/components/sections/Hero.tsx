@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Search,
@@ -28,7 +28,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden"
+      className="relative min-h-[100svh] flex items-center pt-24 pb-10 sm:pb-12 md:pt-32 md:pb-20 overflow-hidden"
     >
       {/* Background Effects with mouse parallax */}
       <div className="absolute inset-0 pointer-events-none">
@@ -44,11 +44,11 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+      <div className="relative z-10 w-full px-4 sm:px-4 md:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="space-y-6 md:space-y-8 lg:space-y-10">
+            <div className="space-y-5 sm:space-y-6 md:space-y-8 lg:space-y-10 w-full min-w-0">
               <HeroLabel />
 
               <HeroHeading />
@@ -95,7 +95,7 @@ function HeroHeading() {
   return (
     <h1
       ref={ref}
-      className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter leading-[0.95] uppercase transition-all duration-700 ${
+      className={`text-[2rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter sm:leading-[0.95] uppercase transition-all duration-700 ${
         isRevealed
           ? "opacity-100 translate-y-0 blur-0"
           : "opacity-0 translate-y-6 blur-sm"
@@ -133,10 +133,22 @@ function HeroDescription() {
 
 function HeroSearch() {
   const { ref, isRevealed } = useScrollReveal();
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  const goSearch = () => {
+    const value = query.trim();
+    if (value) {
+      navigate(`/catalog?city=${encodeURIComponent(value)}`);
+    } else {
+      navigate("/catalog");
+    }
+  };
+
   return (
     <div
       ref={ref}
-      className={`relative p-1.5 sm:p-2 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-xl border border-white/5 shadow-2xl max-w-xl transition-all duration-700 ${
+      className={`relative w-full md:max-w-xl p-2 sm:p-2.5 rounded-2xl md:rounded-[1.5rem] bg-zinc-900/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-700 ${
         isRevealed
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-4 scale-[0.98]"
@@ -146,25 +158,35 @@ function HeroSearch() {
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      <div className="flex flex-col sm:flex-row gap-2">
-        <div className="flex-1 flex items-center gap-3 px-4 sm:px-5 h-12 sm:h-14 rounded-xl md:rounded-[1.25rem] bg-white/[0.03] border border-white/5">
-          <Search className="w-4 h-4 text-primary/60 shrink-0" />
+      <form
+        className="flex items-stretch gap-2"
+        onSubmit={(event) => {
+          event.preventDefault();
+          goSearch();
+        }}
+      >
+        <label className="min-w-0 flex-1 flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-5 h-14 rounded-xl md:rounded-[1.25rem] bg-white/[0.04] border border-white/10 focus-within:border-primary/40 transition-colors">
+          <Search className="w-5 h-5 text-primary/70 shrink-0" />
           <input
-            type="text"
+            type="search"
+            enterKeyHint="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
             placeholder="Район, метро или адрес..."
-            className="w-full bg-transparent text-xs sm:text-sm text-white placeholder:text-white/20 outline-none"
+            className="min-w-0 w-full bg-transparent text-sm sm:text-base text-white placeholder:text-white/35 outline-none"
+            aria-label="Поиск по району, метро или адресу"
           />
-        </div>
-        <Link to="/catalog">
-          <Button
-            className="h-12 sm:h-14 rounded-xl md:rounded-[1.25rem] w-full sm:w-auto"
-            variant="gradient"
-          >
-            <span className="hidden sm:inline">Найти</span>
-            <ArrowRight className="w-4 h-4 sm:ml-2" />
-          </Button>
-        </Link>
-      </div>
+        </label>
+        <Button
+          type="submit"
+          variant="gradient"
+          aria-label="Найти"
+          className="h-14 w-14 sm:w-auto shrink-0 rounded-xl md:rounded-[1.25rem] px-0 sm:px-6 text-[11px] sm:text-xs"
+        >
+          <span className="hidden sm:inline">Найти</span>
+          <ArrowRight className="w-5 h-5 sm:w-4 sm:h-4" />
+        </Button>
+      </form>
     </div>
   );
 }
@@ -186,7 +208,7 @@ function HeroTags() {
         <Link
           key={tag.label}
           to={`/catalog?category=${tag.category}`}
-          className="px-3 md:px-4 py-2 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest bg-white/[0.03] border border-white/5 text-white/30 hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all duration-300 hover:-translate-y-0.5"
+          className="px-3.5 py-2.5 sm:px-4 sm:py-2 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/[0.03] border border-white/5 text-white/40 hover:text-primary hover:border-primary/20 hover:bg-primary/5 transition-all duration-300 hover:-translate-y-0.5"
         >
           {tag.label}
         </Link>

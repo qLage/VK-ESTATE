@@ -37,8 +37,8 @@ export function PropertyCard({
 
   return (
     <Link to={`/catalog/${property.id}`} className="block h-full">
-      <Card className="group flex flex-col overflow-hidden bg-zinc-900/40 border-white/5 hover:border-primary/20 rounded-2xl md:rounded-[1.5rem] h-[420px] sm:h-[440px] md:h-[460px] hover-lift transition-all duration-500">
-        <div className="relative h-[200px] sm:h-[220px] flex-shrink-0 overflow-hidden bg-zinc-800">
+      <Card className="group flex flex-col overflow-hidden bg-zinc-900/40 border-white/5 hover:border-primary/20 rounded-2xl md:rounded-[1.5rem] min-h-[400px] sm:h-[440px] md:h-[460px] hover-lift transition-all duration-500">
+        <div className="relative h-[210px] sm:h-[220px] flex-shrink-0 overflow-hidden bg-zinc-800">
           <LazyImage
             src={property.coverUrl}
             alt={title}
