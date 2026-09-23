@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { useSite } from "@/hooks/useSite";
-import { mailtoHref, primaryAddress, primaryEmail, primaryPhone, telHref } from "@/lib/site";
+import { mailtoHref, officeAddress, primaryEmail, primaryPhone, telHref } from "@/lib/site";
 
 interface CTAProps {
   onOpenForm: () => void;
@@ -12,7 +12,7 @@ export function CTA({ onOpenForm }: CTAProps) {
   const { profile } = useSite();
   const phone = primaryPhone(profile);
   const email = primaryEmail(profile);
-  const office = primaryAddress(profile);
+  const office = officeAddress(profile);
 
   const cards = [
     phone && {
@@ -31,7 +31,7 @@ export function CTA({ onOpenForm }: CTAProps) {
     },
     office && {
       icon: MapPin,
-      label: office.label || "Офис",
+      label: "Офис",
       value: office.address,
       description: profile.workingHours || "По предварительной записи",
       href: `https://yandex.ru/maps/?text=${encodeURIComponent(office.address)}`,

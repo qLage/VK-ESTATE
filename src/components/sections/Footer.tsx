@@ -7,9 +7,10 @@ import {
   isInternalLink,
   legalEntityLine,
   mailtoHref,
-  primaryAddress,
   primaryEmail,
   primaryPhone,
+  officeAddress,
+  legalAddress,
   socialEntries,
   telHref,
   type SiteSocialKey,
@@ -122,7 +123,8 @@ export function Footer() {
   const name = displayName(profile, branding);
   const phone = primaryPhone(profile);
   const email = primaryEmail(profile);
-  const office = primaryAddress(profile);
+  const office = officeAddress(profile);
+  const legal = legalAddress(profile);
   const socials = socialEntries(profile);
   const year = new Date().getFullYear();
 
@@ -250,10 +252,9 @@ export function Footer() {
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
               <div className="text-[10px] text-white/15 leading-relaxed">
                 <p>{legalEntityLine(profile)}</p>
-                {office && (
+                {legal && (
                   <p className="mt-0.5">
-                    {office.label ? `${office.label}: ` : "Юридический адрес: "}
-                    {office.address}
+                    Юридический адрес: {legal.address}
                   </p>
                 )}
               </div>

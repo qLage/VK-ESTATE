@@ -1,11 +1,11 @@
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { useSite } from "@/hooks/useSite";
-import { operatorRequisites, primaryAddress, primaryEmail } from "@/lib/site";
+import { operatorRequisites, legalAddress, primaryEmail } from "@/lib/site";
 
 export default function OfferPage() {
   const { profile } = useSite();
   const email = primaryEmail(profile) || "info@vkrysha.ru";
-  const office = primaryAddress(profile);
+  const legal = legalAddress(profile);
 
   return (
     <LegalLayout title="Договор публичной оферты" updatedDate="04 июня 2026 г.">
@@ -134,7 +134,7 @@ export default function OfferPage() {
           <p><span className="text-white/40">Полное наименование:</span> <span className="text-white">{profile.legalName}</span></p>
           {profile.inn && <p><span className="text-white/40">ИНН:</span> <span className="text-white">{profile.inn}</span></p>}
           {profile.ogrnip && <p><span className="text-white/40">ОГРНИП:</span> <span className="text-white">{profile.ogrnip}</span></p>}
-          {office && <p><span className="text-white/40">Юридический адрес:</span> <span className="text-white">{office.address}</span></p>}
+          {legal && <p><span className="text-white/40">Юридический адрес:</span> <span className="text-white">{legal.address}</span></p>}
           <p><span className="text-white/40">Расчётный счёт:</span> <span className="text-white">40802810113000104947</span></p>
           <p><span className="text-white/40">Банк:</span> <span className="text-white">ПАО Сбербанк, г. Воронеж</span></p>
           <p><span className="text-white/40">БИК:</span> <span className="text-white">042007681</span></p>

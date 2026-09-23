@@ -6,6 +6,7 @@ export interface SiteAddress {
   label: string | null;
   address: string;
   isPrimary: boolean;
+  branchId: string | null;
 }
 
 export interface SiteSocials {
@@ -52,19 +53,26 @@ export const FALLBACK_PROFILE: SiteProfile = {
   description: null,
   inn: "366112052029",
   ogrnip: "323366800066581",
-  phones: ["+7 (XXX) XXX-XX-XX"],
+  phones: ["+7 (980) 349-08-83"],
   emails: ["boyarova.angelina.rieltor@mail.ru"],
   addresses: [
     {
-      label: "Офис",
+      label: "Центр",
+      address: "ул. Площадь Ленина 8Б",
+      isPrimary: false,
+      branchId: "fallback-branch",
+    },
+    {
+      label: "Юридический адрес",
       address: "394000, г. Воронеж, ул. Донбасская, д. 25К2, кв. 168",
       isPrimary: true,
+      branchId: null,
     },
   ],
-  workingHours: "Пн–Пт 9:00–20:00",
+  workingHours: "Пн–Пт 09:00–20:00",
   socials: {
     telegram: "https://t.me/vashakrysha",
-    whatsapp: "https://wa.me/78001234567",
+    whatsapp: "https://wa.me/79803490883",
     vk: "https://vk.com/vashakrysha",
     youtube: "https://youtube.com/@vashakrysha",
     max: null,
@@ -142,7 +150,28 @@ export function primaryEmail(profile: SiteProfile): string | null {
 }
 
 export function primaryAddress(profile: SiteProfile): SiteAddress | null {
-  return profile.addresses.find((item) => item.isPrimary) || profile.addresses[0] || null;
+  return officeAddress(profile) || legalAddress(profile);
+}
+
+/** Public office from a CRM branch (филиал), not the IP registration address. */
+export function officeAddress(profile: SiteProfile): SiteAddress | null {
+  const fromBranch = profile.addresses.find((item) => item.branchId);
+  if (fromBranch) {
+    return {
+      ...fromBranch,
+      label: fromBranch.label || "Офис",
+    };
+  }
+  return null;
+}
+
+/** Legal / registration address (no branch_id). */
+export function legalAddress(profile: SiteProfile): SiteAddress | null {
+  return (
+    profile.addresses.find((item) => !item.branchId && item.isPrimary) ||
+    profile.addresses.find((item) => !item.branchId) ||
+    null
+  );
 }
 
 export function displayName(profile: SiteProfile, branding: SiteBranding): string {
@@ -160,7 +189,7 @@ export function operatorRequisites(profile: SiteProfile): string {
   const extras = [];
   if (profile.ogrnip) extras.push(`ОГРНИП: ${profile.ogrnip}`);
   if (profile.inn) extras.push(`ИНН: ${profile.inn}`);
-  const address = primaryAddress(profile);
+  const address = legalAddress(profile);
   if (address) extras.push(`адрес: ${address.address}`);
   if (extras.length === 0) return profile.legalName;
   return `${profile.legalName} (${extras.join(", ")})`;
@@ -186,6 +215,7 @@ function normalizeAddresses(raw: unknown): SiteAddress[] {
         label: pickString(row, "label"),
         address,
         isPrimary: Boolean(row.is_primary || row.isPrimary),
+        branchId: pickString(row, "branch_id", "branchId"),
       },
     ];
   });
