@@ -131,8 +131,36 @@ jobs:
               exit 1
             fi
 
-            if ! grep -Rqs "snippets/vkrysha-leads.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
-              echo "WARNING: add to site server block BEFORE CRM /api proxy:"
+            # Wire nginx location if not already included (must be before CRM /api proxy).
+            CONF=""
+            for candidate in /etc/nginx/sites-enabled/* /etc/nginx/conf.d/*.conf; do
+              [ -f "$candidate" ] || continue
+              if $SUDO grep -Eq 'server_name[[:space:]].*vkrysha\.ru' "$candidate"; then
+                CONF="$candidate"
+                break
+              fi
+            done
+            if [ -n "$CONF" ]; then
+              if ! $SUDO grep -q 'snippets/vkrysha-leads.conf' "$CONF"; then
+                echo "Adding leads include to $CONF"
+                TMP=$(mktemp)
+                $SUDO awk '
+                  BEGIN { done=0 }
+                  /server_name/ && /vkrysha\.ru/ && done==0 {
+                    print
+                    print "    include /etc/nginx/snippets/vkrysha-leads.conf;"
+                    done=1
+                    next
+                  }
+                  { print }
+                ' "$CONF" | $SUDO tee "$TMP" >/dev/null
+                $SUDO cp "$TMP" "$CONF"
+                rm -f "$TMP"
+              else
+                echo "Leads nginx include already present in $CONF"
+              fi
+            else
+              echo "WARNING: could not find vkrysha.ru nginx config; add manually:"
               echo "    include /etc/nginx/snippets/vkrysha-leads.conf;"
             fi
 
