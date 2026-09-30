@@ -24,7 +24,6 @@ jobs:
           mkdir -p leads-pack
           cp server/leads-api/index.js server/leads-api/package.json leads-pack/
           cp deploy/nginx-leads.conf deploy/vkrysha-leads.service deploy/vkrysha-leads.env.example leads-pack/
-          tar -czf leads-api.tar.gz -C leads-pack .
 
       - uses: actions/upload-artifact@v4
         with:
@@ -35,7 +34,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: leads-api
-          path: leads-api.tar.gz
+          path: leads-pack/
           retention-days: 1
 
   deploy:
@@ -50,7 +49,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: leads-api
-          path: .
+          path: leads-pack/
 
       - uses: appleboy/scp-action@v0.1.7
         with:
@@ -67,8 +66,9 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "leads-api.tar.gz"
-          target: /home/${{ secrets.SERVER_USER }}/vkrysha-leads-upload
+          source: "leads-pack/*"
+          target: vkrysha-leads-upload
+          strip_components: 1
           overwrite: true
           rm: true
 
@@ -88,25 +88,24 @@ jobs:
             UNIT_FILE=/etc/systemd/system/vkrysha-leads.service
             NGINX_SNIPPET=/etc/nginx/snippets/vkrysha-leads.conf
             UPLOAD="$HOME/vkrysha-leads-upload"
-            UNPACK="$HOME/vkrysha-leads-unpack"
-            TAR="$UPLOAD/leads-api.tar.gz"
 
-            rm -rf "$UNPACK"
-            mkdir -p "$UNPACK"
+            echo "Upload contents:"
+            ls -la "$UPLOAD"
+
             $SUDO mkdir -p "$LEADS_DIR" "$DATA_DIR" /etc/nginx/snippets
-            tar -xzf "$TAR" -C "$UNPACK"
+            $SUDO cp "$UPLOAD/index.js" "$LEADS_DIR/index.js"
+            $SUDO cp "$UPLOAD/package.json" "$LEADS_DIR/package.json"
+            $SUDO cp "$UPLOAD/vkrysha-leads.service" "$UNIT_FILE"
+            $SUDO cp "$UPLOAD/nginx-leads.conf" "$NGINX_SNIPPET"
 
-            $SUDO cp "$UNPACK/index.js" "$LEADS_DIR/index.js"
-            $SUDO cp "$UNPACK/package.json" "$LEADS_DIR/package.json"
-            $SUDO cp "$UNPACK/vkrysha-leads.service" "$UNIT_FILE"
-            $SUDO cp "$UNPACK/nginx-leads.conf" "$NGINX_SNIPPET"
-
-            if [ ! -f "$ENV_FILE" ]; then
+            if ! $SUDO test -f "$ENV_FILE"; then
               TOKEN=$(openssl rand -hex 32)
               printf 'LEADS_API_TOKEN=%s\nLEADS_HOST=127.0.0.1\nLEADS_PORT=8787\nLEADS_DATA_DIR=%s\n' "$TOKEN" "$DATA_DIR" | $SUDO tee "$ENV_FILE" >/dev/null
               $SUDO chmod 640 "$ENV_FILE"
               echo "Created $ENV_FILE"
               echo "LEADS_API_TOKEN=$TOKEN"
+            else
+              echo "Using existing $ENV_FILE"
             fi
 
             if ! command -v node >/dev/null 2>&1; then
