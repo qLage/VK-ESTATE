@@ -29,6 +29,10 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
+        '/api/leads': {
+          target: 'http://127.0.0.1:8787',
+          changeOrigin: true,
+        },
         '/api/site-catalog': {
           target: 'https://vkrysha-crm.ru',
           changeOrigin: true,

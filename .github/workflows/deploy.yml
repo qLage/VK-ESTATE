@@ -19,10 +19,23 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - name: Pack leads API
+        run: |
+          mkdir -p leads-pack
+          cp server/leads-api/index.js server/leads-api/package.json leads-pack/
+          cp deploy/nginx-leads.conf deploy/vkrysha-leads.service deploy/vkrysha-leads.env.example leads-pack/
+          tar -czf leads-api.tar.gz -C leads-pack .
+
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: leads-api
+          path: leads-api.tar.gz
           retention-days: 1
 
   deploy:
@@ -34,6 +47,11 @@ jobs:
           name: dist
           path: dist/
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: leads-api
+          path: .
+
       - uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -44,12 +62,57 @@ jobs:
           strip_components: 1
           overwrite: true
 
+      - uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          source: "leads-api.tar.gz"
+          target: /tmp
+          overwrite: true
+
       - uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
+            set -e
+            LEADS_DIR=/var/www/vkrysha-leads
+            DATA_DIR=/var/lib/vkrysha-leads
+            ENV_FILE=/etc/vkrysha-leads.env
+            UNIT_FILE=/etc/systemd/system/vkrysha-leads.service
+            NGINX_SNIPPET=/etc/nginx/snippets/vkrysha-leads.conf
+            UNPACK=/tmp/vkrysha-leads-unpack
+
+            rm -rf "$UNPACK"
+            mkdir -p "$UNPACK" "$LEADS_DIR" "$DATA_DIR" /etc/nginx/snippets
+            tar -xzf /tmp/leads-api.tar.gz -C "$UNPACK"
+
+            cp "$UNPACK/index.js" "$LEADS_DIR/index.js"
+            cp "$UNPACK/package.json" "$LEADS_DIR/package.json"
+            cp "$UNPACK/vkrysha-leads.service" "$UNIT_FILE"
+            cp "$UNPACK/nginx-leads.conf" "$NGINX_SNIPPET"
+
+            if [ ! -f "$ENV_FILE" ]; then
+              TOKEN=$(openssl rand -hex 32)
+              printf 'LEADS_API_TOKEN=%s\nLEADS_HOST=127.0.0.1\nLEADS_PORT=8787\nLEADS_DATA_DIR=%s\n' "$TOKEN" "$DATA_DIR" > "$ENV_FILE"
+              chmod 600 "$ENV_FILE"
+              echo "Created $ENV_FILE"
+              echo "LEADS_API_TOKEN=$TOKEN"
+            fi
+
+            chown -R www-data:www-data "$LEADS_DIR" "$DATA_DIR" || true
+            systemctl daemon-reload
+            systemctl enable vkrysha-leads
+            systemctl restart vkrysha-leads
+
+            if ! grep -Rqs "snippets/vkrysha-leads.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
+              echo "WARNING: add to site server block BEFORE CRM /api proxy:"
+              echo "    include /etc/nginx/snippets/vkrysha-leads.conf;"
+            fi
+
             nginx -t
             systemctl reload nginx
+            curl -sS -o /dev/null -w "health:%{http_code}\n" http://127.0.0.1:8787/health || true
             echo "Deploy complete!"

@@ -1,0 +1,21 @@
+[Unit]
+Description=VKRYSHA site leads API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/vkrysha-leads
+EnvironmentFile=-/etc/vkrysha-leads.env
+Environment=LEADS_HOST=127.0.0.1
+Environment=LEADS_PORT=8787
+Environment=LEADS_DATA_DIR=/var/lib/vkrysha-leads
+ExecStart=/usr/bin/node /var/www/vkrysha-leads/index.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

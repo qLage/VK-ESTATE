@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { Phone, User, MessageSquare, Send, CheckCircle } from "lucide-react";
+import { submitLead } from "@/lib/leads";
 
 interface ContactFormProps {
   open: boolean;
@@ -11,6 +12,8 @@ interface ContactFormProps {
 
 export function ContactForm({ open, onClose }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -18,18 +21,34 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!agreed) return;
-    // In production, send to API or Telegram bot
-    console.log("Form submitted:", form);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setAgreed(false);
-      setForm({ name: "", phone: "", message: "" });
-      onClose();
-    }, 2500);
+    if (!agreed || loading) return;
+    setLoading(true);
+    setError("");
+    try {
+      const ok = await submitLead({
+        type: "contact",
+        name: form.name,
+        phone: form.phone,
+        message: form.message,
+      });
+      if (!ok) {
+        setError("Не удалось отправить заявку. Попробуйте ещё раз.");
+        return;
+      }
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setAgreed(false);
+        setForm({ name: "", phone: "", message: "" });
+        onClose();
+      }, 2500);
+    } catch {
+      setError("Не удалось отправить заявку. Попробуйте ещё раз.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,7 +112,6 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
             </div>
           </div>
 
-          {/* Consent checkbox */}
           <label className="flex items-start gap-2.5 cursor-pointer group">
             <input
               type="checkbox"
@@ -110,14 +128,18 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
             </span>
           </label>
 
+          {error ? (
+            <p className="text-xs text-red-400 text-center">{error}</p>
+          ) : null}
+
           <Button
             type="submit"
             variant="gradient"
             className="w-full h-12"
-            disabled={!agreed}
+            disabled={!agreed || loading}
           >
             <Send className="w-4 h-4 mr-2" />
-            Отправить заявку
+            {loading ? "Отправка..." : "Отправить заявку"}
           </Button>
 
           <p className="text-[10px] text-white/15 text-center">

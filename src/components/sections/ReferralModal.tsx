@@ -5,6 +5,7 @@ import { Users, Home, KeyRound, Landmark, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { submitLead } from "@/lib/leads";
 
 const REWARDS = [
   {
@@ -102,12 +103,15 @@ export function ReferralModal() {
     }
     setLoading(true);
     try {
-      const res = await fetch("/api/referrals", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      const ok = await submitLead({
+        type: "referral",
+        friendName: form.friendName,
+        friendPhone: form.friendPhone,
+        referrerName: form.referrerName,
+        referrerPhone: form.referrerPhone,
+        messenger: form.messenger,
       });
-      if (res.ok) {
+      if (ok) {
         setSubmitted(true);
       }
     } catch {
