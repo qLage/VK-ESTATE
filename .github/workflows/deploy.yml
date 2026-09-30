@@ -68,8 +68,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           source: "leads-api.tar.gz"
-          target: /tmp
+          target: /home/${{ secrets.SERVER_USER }}/vkrysha-leads-upload
           overwrite: true
+          rm: true
 
       - uses: appleboy/ssh-action@v1.0.3
         with:
@@ -78,32 +79,35 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
             set -e
+            SUDO=""
+            if [ "$(id -u)" -ne 0 ]; then SUDO="sudo"; fi
+
             LEADS_DIR=/var/www/vkrysha-leads
             DATA_DIR=/var/lib/vkrysha-leads
             ENV_FILE=/etc/vkrysha-leads.env
             UNIT_FILE=/etc/systemd/system/vkrysha-leads.service
             NGINX_SNIPPET=/etc/nginx/snippets/vkrysha-leads.conf
-            UNPACK=/tmp/vkrysha-leads-unpack
+            UPLOAD="$HOME/vkrysha-leads-upload"
+            UNPACK="$HOME/vkrysha-leads-unpack"
+            TAR="$UPLOAD/leads-api.tar.gz"
 
             rm -rf "$UNPACK"
-            mkdir -p "$UNPACK" "$LEADS_DIR" "$DATA_DIR" /etc/nginx/snippets
-            tar -xzf /tmp/leads-api.tar.gz -C "$UNPACK"
+            mkdir -p "$UNPACK"
+            $SUDO mkdir -p "$LEADS_DIR" "$DATA_DIR" /etc/nginx/snippets
+            tar -xzf "$TAR" -C "$UNPACK"
 
-            cp "$UNPACK/index.js" "$LEADS_DIR/index.js"
-            cp "$UNPACK/package.json" "$LEADS_DIR/package.json"
-            cp "$UNPACK/vkrysha-leads.service" "$UNIT_FILE"
-            cp "$UNPACK/nginx-leads.conf" "$NGINX_SNIPPET"
+            $SUDO cp "$UNPACK/index.js" "$LEADS_DIR/index.js"
+            $SUDO cp "$UNPACK/package.json" "$LEADS_DIR/package.json"
+            $SUDO cp "$UNPACK/vkrysha-leads.service" "$UNIT_FILE"
+            $SUDO cp "$UNPACK/nginx-leads.conf" "$NGINX_SNIPPET"
 
             if [ ! -f "$ENV_FILE" ]; then
               TOKEN=$(openssl rand -hex 32)
-              printf 'LEADS_API_TOKEN=%s\nLEADS_HOST=127.0.0.1\nLEADS_PORT=8787\nLEADS_DATA_DIR=%s\n' "$TOKEN" "$DATA_DIR" > "$ENV_FILE"
-              chmod 600 "$ENV_FILE"
+              printf 'LEADS_API_TOKEN=%s\nLEADS_HOST=127.0.0.1\nLEADS_PORT=8787\nLEADS_DATA_DIR=%s\n' "$TOKEN" "$DATA_DIR" | $SUDO tee "$ENV_FILE" >/dev/null
+              $SUDO chmod 640 "$ENV_FILE"
               echo "Created $ENV_FILE"
               echo "LEADS_API_TOKEN=$TOKEN"
             fi
-
-            SUDO=""
-            if [ "$(id -u)" -ne 0 ]; then SUDO="sudo"; fi
 
             if ! command -v node >/dev/null 2>&1; then
               echo "Installing Node.js 22..."
