@@ -12,6 +12,7 @@ Environment=LEADS_HOST=127.0.0.1
 Environment=LEADS_PORT=8787
 Environment=LEADS_DATA_DIR=/var/lib/vkrysha-leads
 ExecStart=/usr/bin/node /var/www/vkrysha-leads/index.js
+# Deploy overwrites ExecStart with the real `node` path if needed.
 Restart=on-failure
 RestartSec=3
 NoNewPrivileges=true
