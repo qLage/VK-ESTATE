@@ -44,7 +44,7 @@ curl -X POST https://vkrysha.ru/api/leads \
 
 ## Получить все заявки (CRM-агент)
 
-Требуется заголовок `Authorization: Bearer <TOKEN>`.
+Требуется заголовок `Authorization: Bearer <TOKEN>` (токен в query-string не принимается).
 
 ```bash
 curl -H "Authorization: Bearer YOUR_TOKEN" \

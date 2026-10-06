@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useSite } from "@/hooks/useSite";
+import { openCookieSettings } from "@/components/sections/CookieConsent";
 import {
   displayName,
   isInternalLink,
@@ -39,6 +40,7 @@ const footerLinks = {
 
 const legalLabels = [
   { key: "privacy" as const, label: "Политика конфиденциальности" },
+  { key: "consent" as const, label: "Согласие на обработку ПДн" },
   { key: "terms" as const, label: "Пользовательское соглашение" },
   { key: "offer" as const, label: "Публичная оферта" },
   { key: "cookies" as const, label: "Использование cookie" },
@@ -244,6 +246,15 @@ export function Footer() {
                     </FooterHref>
                   </li>
                 ))}
+                <li>
+                  <button
+                    type="button"
+                    onClick={openCookieSettings}
+                    className="text-[10px] md:text-xs text-white/25 hover:text-primary transition-colors duration-300 text-left"
+                  >
+                    Настройки cookie
+                  </button>
+                </li>
               </ul>
             </div>
           </div>

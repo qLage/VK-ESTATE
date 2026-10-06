@@ -70,9 +70,7 @@ function trimStr(value, max = 500) {
 function authorize(req) {
   if (!TOKEN) return false;
   const header = req.headers.authorization || "";
-  if (header === `Bearer ${TOKEN}`) return true;
-  const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
-  return url.searchParams.get("token") === TOKEN;
+  return header === `Bearer ${TOKEN}`;
 }
 
 async function ensureStore() {

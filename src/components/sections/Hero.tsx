@@ -282,7 +282,7 @@ function HeroVisual() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-xl">
             <Key className="w-4 h-4 text-primary" />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              Ключи за 3 дня
+              Быстрое сопровождение
             </span>
           </div>
         </div>
@@ -296,7 +296,7 @@ function HeroVisual() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-xl">
             <TrendingUp className="w-4 h-4 text-primary" />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              Лучшие цены
+              Рыночная оценка
             </span>
           </div>
         </div>
@@ -310,7 +310,7 @@ function HeroVisual() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-xl">
             <ShieldCheck className="w-4 h-4 text-primary" />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              Юр. защита
+              Юр. сопровождение
             </span>
           </div>
         </div>
@@ -324,7 +324,7 @@ function HeroVisual() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-xl">
             <Percent className="w-4 h-4 text-primary" />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              Ипотека от 4%
+              Помощь с ипотекой
             </span>
           </div>
         </div>

@@ -15,6 +15,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -24,6 +25,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed || loading) return;
+    if (honeypot.trim()) return;
     setLoading(true);
     setError("");
     try {
@@ -57,11 +59,22 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
         <div className="flex flex-col items-center justify-center py-8 space-y-4 animate-fade-in">
           <CheckCircle className="w-12 h-12 text-primary" />
           <p className="text-sm md:text-base text-white/60 text-center">
-            Спасибо! Мы свяжемся с вами в течение 15 минут.
+            Спасибо! Мы свяжемся с вами по указанному телефону.
           </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="company_website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
+
           <div className="space-y-1.5">
             <label className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary/60">
               Ваше имя
@@ -120,17 +133,20 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
               className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 cursor-pointer"
             />
             <span className="text-[10px] text-white/30 leading-relaxed">
-              Я согласен на обработку{" "}
-              <Link to="/privacy" target="_blank" className="text-primary/60 hover:text-primary underline underline-offset-2">
-                персональных данных
+              Даю согласие на обработку персональных данных (имя, телефон, текст сообщения) для
+              обратной связи по заявке в соответствии с{" "}
+              <Link to="/consent" target="_blank" className="text-primary/60 hover:text-primary underline underline-offset-2">
+                Согласием
               </Link>{" "}
-              в соответствии с Федеральным законом № 152-ФЗ
+              и{" "}
+              <Link to="/privacy" target="_blank" className="text-primary/60 hover:text-primary underline underline-offset-2">
+                Политикой конфиденциальности
+              </Link>
+              . Рекламные рассылки не запрашиваются.
             </span>
           </label>
 
-          {error ? (
-            <p className="text-xs text-red-400 text-center">{error}</p>
-          ) : null}
+          {error ? <p className="text-xs text-red-400 text-center">{error}</p> : null}
 
           <Button
             type="submit"
@@ -141,10 +157,6 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
             <Send className="w-4 h-4 mr-2" />
             {loading ? "Отправка..." : "Отправить заявку"}
           </Button>
-
-          <p className="text-[10px] text-white/15 text-center">
-            Нажимая кнопку «Отправить заявку», вы подтверждаете своё согласие на обработку персональных данных
-          </p>
         </form>
       )}
     </Modal>

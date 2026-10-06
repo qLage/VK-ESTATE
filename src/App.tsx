@@ -14,6 +14,7 @@ import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
 import OfferPage from "@/pages/OfferPage";
 import CookiesPage from "@/pages/CookiesPage";
+import ConsentPage from "@/pages/ConsentPage";
 
 function App() {
   const [formOpen, setFormOpen] = useState(false);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/offer" element={<OfferPage />} />
           <Route path="/cookies" element={<CookiesPage />} />
+          <Route path="/consent" element={<ConsentPage />} />
         </Routes>
         <Footer />
         <ContactForm open={formOpen} onClose={() => setFormOpen(false)} />

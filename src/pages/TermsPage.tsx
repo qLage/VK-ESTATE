@@ -8,7 +8,7 @@ export default function TermsPage() {
   const operator = operatorRequisites(profile);
 
   return (
-    <LegalLayout title="Пользовательское соглашение" updatedDate="04 июня 2026 г.">
+    <LegalLayout title="Пользовательское соглашение" updatedDate="06 октября 2026 г.">
       <section>
         <h2 className="text-lg font-bold text-white mb-3">1. Общие положения</h2>
         <p>

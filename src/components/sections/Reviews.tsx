@@ -45,6 +45,10 @@ export function Reviews() {
                 Что <span className="text-primary">говорят</span>{" "}
                 <span className="text-white/10">клиенты</span>
               </h2>
+              <p className="text-xs text-white/25 max-w-xl pt-2">
+                Примеры отзывов. Подлинность отдельных формулировок подлежит подтверждению
+                Оператором.
+              </p>
             </div>
           </ScrollReveal>
 

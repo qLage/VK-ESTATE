@@ -25,8 +25,13 @@ export function PropertyMap(props: PropertyMapProps) {
         src={src}
         className="w-full h-[220px] sm:h-[260px] border-0"
         loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen
       />
+      <p className="px-3 py-2 text-[10px] text-white/25 border-t border-white/5">
+        Карта загружается с сервиса Яндекс.Карты (сторонний сервис). При отображении виджет может
+        обрабатывать технические данные вашего устройства.
+      </p>
     </div>
   );
 }

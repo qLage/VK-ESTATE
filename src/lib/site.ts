@@ -23,6 +23,7 @@ export interface SiteLegalLinks {
   terms: string;
   offer: string;
   cookies: string;
+  consent: string;
 }
 
 export interface SiteProfile {
@@ -83,6 +84,7 @@ export const FALLBACK_PROFILE: SiteProfile = {
     terms: "/terms",
     offer: "/offer",
     cookies: "/cookies",
+    consent: "/consent",
   },
 };
 
@@ -242,6 +244,7 @@ function normalizeLegalLinks(raw: unknown): Partial<SiteLegalLinks> {
     terms: pickString(row, "terms") || undefined,
     offer: pickString(row, "offer") || undefined,
     cookies: pickString(row, "cookies") || undefined,
+    consent: pickString(row, "consent") || undefined,
   };
 }
 
@@ -272,6 +275,7 @@ export function normalizeSiteProfile(raw: unknown): Partial<SiteProfile> {
       terms: legalLinks.terms || FALLBACK_PROFILE.legalLinks.terms,
       offer: legalLinks.offer || FALLBACK_PROFILE.legalLinks.offer,
       cookies: legalLinks.cookies || FALLBACK_PROFILE.legalLinks.cookies,
+      consent: legalLinks.consent || FALLBACK_PROFILE.legalLinks.consent,
     },
   };
 }

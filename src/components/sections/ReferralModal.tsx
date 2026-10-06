@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Modal } from "@/components/ui/modal";
 import { Users, Home, KeyRound, Landmark, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -62,6 +62,8 @@ export function ReferralModal() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [form, setForm] = useState({
     friendName: "",
     friendPhone: "",
@@ -94,6 +96,8 @@ export function ReferralModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
+      !agreed ||
+      honeypot.trim() ||
       !form.friendName.trim() ||
       !form.friendPhone.trim() ||
       !form.referrerName.trim() ||
@@ -173,6 +177,16 @@ export function ReferralModal() {
           </>
         ) : !submitted ? (
           <form onSubmit={handleSubmit} className="space-y-3 text-left">
+              <input
+                type="text"
+                name="company_website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
               <div className="space-y-1.5">
                 <Label className="text-white/90 text-sm">Имя друга</Label>
                 <Input
@@ -257,9 +271,31 @@ export function ReferralModal() {
                 </div>
               </div>
 
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 cursor-pointer"
+                />
+                <span className="text-[10px] text-white/35 leading-relaxed text-left">
+                  Даю согласие на обработку моих персональных данных и подтверждаю, что указал
+                  данные друга правомерно (друг проинформирован о передаче контактов для связи)
+                  в соответствии с{" "}
+                  <Link to="/consent" target="_blank" className="text-primary/60 hover:text-primary underline underline-offset-2">
+                    Согласием
+                  </Link>{" "}
+                  и{" "}
+                  <Link to="/privacy" target="_blank" className="text-primary/60 hover:text-primary underline underline-offset-2">
+                    Политикой
+                  </Link>
+                  .
+                </span>
+              </label>
+
               <Button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !agreed}
                 className="w-full h-12 text-sm font-black uppercase tracking-widest bg-primary hover:bg-primary/90 text-white disabled:opacity-50"
               >
                 {loading ? "Отправка..." : "Отправить заявку"}

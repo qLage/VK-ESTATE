@@ -74,8 +74,8 @@ export function CTA({ onOpenForm }: CTAProps) {
                   </h2>
 
                   <p className="text-sm md:text-base text-white/30 max-w-md leading-relaxed">
-                    Оставьте заявку и наш риелтор свяжется с вами в течение 15 минут.
-                    Бесплатный подбор, оценка и консультация.
+                    Оставьте заявку — риелтор свяжется с вами в рабочие часы.
+                    Консультация по обращению бесплатна.
                   </p>
 
                   <div className="flex flex-wrap gap-3 md:gap-4">

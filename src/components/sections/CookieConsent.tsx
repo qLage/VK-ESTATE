@@ -1,46 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { X, Cookie, Settings2 } from "lucide-react";
 import { useSite } from "@/hooks/useSite";
 import { isInternalLink } from "@/lib/site";
-
-const COOKIE_CONSENT_KEY = "vkrysha_cookie_consent";
-
-function hasConsentRecord(): boolean {
-  if (typeof window === "undefined") return false;
-  return Boolean(localStorage.getItem(COOKIE_CONSENT_KEY));
-}
+import {
+  COOKIE_CONSENT_KEY,
+  clearCookieConsent,
+  readCookieConsent,
+  writeCookieConsent,
+} from "@/lib/consent";
 
 export function CookieConsent() {
-  const [visible, setVisible] = useState(() => !hasConsentRecord());
+  const [visible, setVisible] = useState(() => !readCookieConsent());
   const [showSettings, setShowSettings] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
-  const [marketing, setMarketing] = useState(false);
   const { profile } = useSite();
   const cookiesHref = profile.legalLinks.cookies;
 
-  const acceptAll = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ consent: "all", date: new Date().toISOString() }));
-    setVisible(false);
-    setShowSettings(false);
-  };
+  useEffect(() => {
+    const sync = () => setVisible(!readCookieConsent());
+    window.addEventListener("vkrysha-cookie-consent", sync);
+    return () => window.removeEventListener("vkrysha-cookie-consent", sync);
+  }, []);
 
   const acceptNecessary = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ consent: "necessary", date: new Date().toISOString() }));
+    writeCookieConsent({ consent: "necessary", date: new Date().toISOString() });
     setVisible(false);
     setShowSettings(false);
   };
 
   const saveSettings = () => {
-    localStorage.setItem(
-      COOKIE_CONSENT_KEY,
-      JSON.stringify({
-        consent: "custom",
-        analytics,
-        marketing,
-        date: new Date().toISOString(),
-      })
-    );
+    // Analytics/marketing scripts are not shipped; store only necessary choice.
+    writeCookieConsent({ consent: "necessary", date: new Date().toISOString() });
     setVisible(false);
     setShowSettings(false);
   };
@@ -58,18 +48,19 @@ export function CookieConsent() {
                   <Cookie className="w-5 h-5 text-primary" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-sm font-bold text-white">Мы используем cookie</p>
+                  <p className="text-sm font-bold text-white">Файлы cookie и локальное хранение</p>
                   <p className="text-[11px] text-white/40 leading-relaxed">
-                    Сайт использует файлы cookie для улучшения работы и персонализации контента.
-                    Вы можете настроить использование cookie или принять все.
-                    Подробнее в{" "}
+                    Сайт сохраняет в вашем браузере технические данные (выбор этого баннера,
+                    служебные флаги интерфейса). Счётчики аналитики и рекламные пиксели сейчас
+                    не подключены. Сторонние сервисы (например, Яндекс.Карты на страницах объектов)
+                    могут обрабатывать данные при их загрузке — подробнее в{" "}
                     {isInternalLink(cookiesHref) ? (
                       <Link to={cookiesHref} className="text-primary/60 hover:text-primary underline underline-offset-2">
-                        Политике использования cookie
+                        Политике cookie
                       </Link>
                     ) : (
                       <a href={cookiesHref} className="text-primary/60 hover:text-primary underline underline-offset-2">
-                        Политике использования cookie
+                        Политике cookie
                       </a>
                     )}
                     .
@@ -78,92 +69,71 @@ export function CookieConsent() {
               </div>
               <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
                 <button
+                  type="button"
                   onClick={() => setShowSettings(true)}
                   className="flex-1 sm:flex-none h-10 px-4 rounded-xl text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-white bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all"
                 >
                   <Settings2 className="w-3.5 h-3.5 inline mr-1.5" />
-                  Настроить
+                  Подробнее
                 </button>
                 <button
-                  onClick={acceptAll}
+                  type="button"
+                  onClick={acceptNecessary}
                   className="flex-1 sm:flex-none h-10 px-4 rounded-xl text-[11px] font-black uppercase tracking-widest bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
-                  Принять
-                </button>
-                <button
-                  onClick={acceptNecessary}
-                  className="h-10 w-10 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/5 transition-all shrink-0"
-                  aria-label="Отклонить"
-                >
-                  <X className="w-4 h-4" />
+                  Понятно
                 </button>
               </div>
             </div>
           ) : (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-bold text-white">Настройки cookie</p>
+                <p className="text-sm font-bold text-white">Что сохраняется</p>
                 <button
+                  type="button"
                   onClick={() => setShowSettings(false)}
                   className="h-8 w-8 rounded-lg bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/30 hover:text-white transition-all"
+                  aria-label="Закрыть"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              <div className="space-y-3">
-                {/* Necessary - always on */}
-                <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div>
-                    <p className="text-xs font-bold text-white">Необходимые</p>
-                    <p className="text-[10px] text-white/30 mt-0.5">Обеспечивают корректную работу сайта</p>
-                  </div>
-                  <div className="h-5 w-9 rounded-full bg-primary relative shrink-0">
-                    <div className="absolute right-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow-sm" />
-                  </div>
+              <div className="space-y-3 text-[11px] text-white/40 leading-relaxed">
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                  <p className="text-xs font-bold text-white mb-1">Необходимые / технические</p>
+                  <p>
+                    Ключ <code className="text-white/50">{COOKIE_CONSENT_KEY}</code> в localStorage —
+                    ваш выбор по этому уведомлению; sessionStorage для закрытия реферального окна.
+                  </p>
                 </div>
-
-                {/* Analytics */}
-                <label className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5 cursor-pointer hover:bg-white/[0.04] transition-colors">
-                  <div>
-                    <p className="text-xs font-bold text-white">Аналитические</p>
-                    <p className="text-[10px] text-white/30 mt-0.5">Помогают улучшать сайт (Яндекс.Метрика)</p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={analytics}
-                    onChange={(e) => setAnalytics(e.target.checked)}
-                    className="w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 shrink-0"
-                  />
-                </label>
-
-                {/* Marketing */}
-                <label className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5 cursor-pointer hover:bg-white/[0.04] transition-colors">
-                  <div>
-                    <p className="text-xs font-bold text-white">Маркетинговые</p>
-                    <p className="text-[10px] text-white/30 mt-0.5">Используются для персонализации рекламы</p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={marketing}
-                    onChange={(e) => setMarketing(e.target.checked)}
-                    className="w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 shrink-0"
-                  />
-                </label>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                  <p className="text-xs font-bold text-white mb-1">Аналитика и маркетинг</p>
+                  <p>
+                    Скрипты Яндекс.Метрики, Google Analytics и рекламные пиксели на сайте не
+                    установлены. Если они появятся позже, загрузка будет только после отдельного
+                    согласия.
+                  </p>
+                </div>
               </div>
 
               <div className="flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={saveSettings}
                   className="flex-1 h-10 rounded-xl text-[11px] font-black uppercase tracking-widest bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
-                  Сохранить настройки
+                  Сохранить
                 </button>
                 <button
-                  onClick={acceptAll}
-                  className="flex-1 h-10 rounded-xl text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-white bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all"
+                  type="button"
+                  onClick={() => {
+                    clearCookieConsent();
+                    setVisible(true);
+                  }}
+                  className="flex-1 h-10 rounded-xl text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-white bg-white/[0.03] border border-white/10"
                 >
-                  Принять все
+                  Сбросить выбор
                 </button>
               </div>
             </div>
@@ -172,4 +142,9 @@ export function CookieConsent() {
       </div>
     </div>
   );
+}
+
+/** Re-open cookie notice from footer / settings. */
+export function openCookieSettings(): void {
+  clearCookieConsent();
 }
