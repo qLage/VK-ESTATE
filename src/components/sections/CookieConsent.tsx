@@ -13,6 +13,8 @@ import {
 export function CookieConsent() {
   const [visible, setVisible] = useState(() => !readCookieConsent());
   const [showSettings, setShowSettings] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+  const [marketing, setMarketing] = useState(false);
   const { profile } = useSite();
   const cookiesHref = profile.legalLinks.cookies;
 
@@ -22,6 +24,21 @@ export function CookieConsent() {
     return () => window.removeEventListener("vkrysha-cookie-consent", sync);
   }, []);
 
+  useEffect(() => {
+    if (!showSettings) return;
+    const current = readCookieConsent();
+    if (current?.consent === "all") {
+      setAnalytics(true);
+      setMarketing(true);
+    } else if (current?.consent === "custom") {
+      setAnalytics(Boolean(current.analytics));
+      setMarketing(Boolean(current.marketing));
+    } else {
+      setAnalytics(false);
+      setMarketing(false);
+    }
+  }, [showSettings]);
+
   const acceptNecessary = () => {
     writeCookieConsent({ consent: "necessary", date: new Date().toISOString() });
     setVisible(false);
@@ -29,8 +46,14 @@ export function CookieConsent() {
   };
 
   const saveSettings = () => {
-    // Analytics/marketing scripts are not shipped; store only necessary choice.
-    writeCookieConsent({ consent: "necessary", date: new Date().toISOString() });
+    const date = new Date().toISOString();
+    if (analytics && marketing) {
+      writeCookieConsent({ consent: "all", date });
+    } else if (!analytics && !marketing) {
+      writeCookieConsent({ consent: "necessary", date });
+    } else {
+      writeCookieConsent({ consent: "custom", analytics, marketing, date });
+    }
     setVisible(false);
     setShowSettings(false);
   };
@@ -100,21 +123,49 @@ export function CookieConsent() {
               </div>
 
               <div className="space-y-3 text-[11px] text-white/40 leading-relaxed">
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                  <p className="text-xs font-bold text-white mb-1">Необходимые / технические</p>
-                  <p>
+                <label className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 cursor-default">
+                  <input
+                    type="checkbox"
+                    checked
+                    disabled
+                    className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary opacity-70"
+                  />
+                  <span>
+                    <span className="block text-xs font-bold text-white mb-1">
+                      Необходимые / технические
+                    </span>
                     Ключ <code className="text-white/50">{COOKIE_CONSENT_KEY}</code> в localStorage —
                     ваш выбор по этому уведомлению; sessionStorage для закрытия реферального окна.
-                  </p>
-                </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                  <p className="text-xs font-bold text-white mb-1">Аналитика и маркетинг</p>
-                  <p>
-                    Скрипты Яндекс.Метрики, Google Analytics и рекламные пиксели на сайте не
-                    установлены. Если они появятся позже, загрузка будет только после отдельного
-                    согласия.
-                  </p>
-                </div>
+                    Всегда включены.
+                  </span>
+                </label>
+
+                <label className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 cursor-pointer hover:border-white/10 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={analytics}
+                    onChange={(e) => setAnalytics(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 cursor-pointer"
+                  />
+                  <span>
+                    <span className="block text-xs font-bold text-white mb-1">Аналитика</span>
+                    Яндекс.Метрика / аналоги. Сейчас скрипты не установлены — выбор сохранится и
+                    будет учтён при подключении.
+                  </span>
+                </label>
+
+                <label className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 cursor-pointer hover:border-white/10 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={marketing}
+                    onChange={(e) => setMarketing(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.03] text-primary focus:ring-primary/30 cursor-pointer"
+                  />
+                  <span>
+                    <span className="block text-xs font-bold text-white mb-1">Маркетинг</span>
+                    Рекламные пиксели. Сейчас не установлены — загрузка только после согласия.
+                  </span>
+                </label>
               </div>
 
               <div className="flex items-center gap-2">
@@ -129,6 +180,8 @@ export function CookieConsent() {
                   type="button"
                   onClick={() => {
                     clearCookieConsent();
+                    setAnalytics(false);
+                    setMarketing(false);
                     setVisible(true);
                   }}
                   className="flex-1 h-10 rounded-xl text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-white bg-white/[0.03] border border-white/10"
