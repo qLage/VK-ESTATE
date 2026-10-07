@@ -4,6 +4,8 @@
 //   prod — nginx must add the same token (see deploy/nginx-site-catalog.conf)
 // Gallery and employees still use the public CRM endpoints via /api.
 
+import { sanitizeMortgageAdClaims } from "@/lib/sanitizeMortgageAds";
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
 
 export interface CatalogAgent {
@@ -133,7 +135,7 @@ export function normalizeCatalogProperty(raw: unknown): CatalogProperty {
     coverUrl,
     photoCount: asNumber(pick(row, "photoCount", "photo_count")) || 0,
     agent: normalizeAgent(row.agent),
-    description: pick<string>(row, "description") || null,
+    description: sanitizeMortgageAdClaims(pick<string>(row, "description") || null),
     photos: normalizePhotos(row.photos, coverUrl),
     coordinates: lat != null && lng != null ? { lat, lng } : null,
     lat,

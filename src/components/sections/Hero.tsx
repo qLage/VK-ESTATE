@@ -267,7 +267,7 @@ function HeroVisual() {
           <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/5 shadow-xl">
             <Home className="w-4 h-4 text-primary" />
             <span className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              500+ сделок
+              Сделки с 2023
             </span>
           </div>
         </div>

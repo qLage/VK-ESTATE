@@ -132,13 +132,19 @@ function buildContactLead(body, page) {
 }
 
 function buildReferralLead(body, page) {
-  const friendName = trimStr(body.friendName, 120);
-  const friendPhone = trimStr(body.friendPhone, 40);
+  // B1 Variant A: only referrer's own PD. Reject legacy third-party fields.
+  if (trimStr(body.friendName, 1) || trimStr(body.friendPhone, 1)) {
+    return {
+      error:
+        "third_party_contacts_not_accepted: use referrerName/referrerPhone only",
+    };
+  }
   const referrerName = trimStr(body.referrerName, 120);
   const referrerPhone = trimStr(body.referrerPhone, 40);
   const messenger = trimStr(body.messenger || "whatsapp", 40) || "whatsapp";
-  if (!friendName || !friendPhone || !referrerName || !referrerPhone) {
-    return { error: "friendName, friendPhone, referrerName, referrerPhone are required" };
+  const interest = trimStr(body.interest || "other", 40) || "other";
+  if (!referrerName || !referrerPhone) {
+    return { error: "referrerName and referrerPhone are required" };
   }
   return {
     lead: {
@@ -147,14 +153,13 @@ function buildReferralLead(body, page) {
       createdAt: new Date().toISOString(),
       name: referrerName,
       phone: referrerPhone,
-      message: "",
+      message: `referral_interest:${interest}`,
       source: "referral_form",
       page: trimStr(page || body.page || "/", 300) || "/",
-      friendName,
-      friendPhone,
       referrerName,
       referrerPhone,
       messenger,
+      interest,
     },
   };
 }
@@ -181,6 +186,13 @@ async function handlePost(req, res) {
     return json(res, 400, { ok: false, error: "invalid_json" });
   }
 
+  // Consent must be asserted by the client after an explicit checkbox action.
+  // This does not prove legal sufficiency for third-party (referral) data —
+  // it only blocks anonymous API bypass of the UI gate.
+  if (body.consentAccepted !== true) {
+    return json(res, 400, { ok: false, error: "consent_required" });
+  }
+
   const type = trimStr(body.type || "contact", 40) || "contact";
   const page = trimStr(body.page, 300);
   const built =
@@ -189,6 +201,9 @@ async function handlePost(req, res) {
   if (built.error) {
     return json(res, 400, { ok: false, error: built.error });
   }
+
+  built.lead.consentAccepted = true;
+  built.lead.consentAcceptedAt = new Date().toISOString();
 
   await appendLead(built.lead);
   return json(res, 201, { ok: true, lead: built.lead });

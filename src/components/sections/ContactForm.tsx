@@ -34,6 +34,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
         name: form.name,
         phone: form.phone,
         message: form.message,
+        consentAccepted: true,
       });
       if (!ok) {
         setError("Не удалось отправить заявку. Попробуйте ещё раз.");

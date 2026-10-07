@@ -1,35 +1,31 @@
 import { Building2, Users, Award, Clock } from "lucide-react";
-import { AnimatedCounter } from "@/components/animations/AnimatedCounter";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
+/** Numeric marketing claims require owner-verified facts (see LEGAL_REVIEW). */
 const stats = [
   {
     icon: Building2,
-    value: 500,
-    suffix: "+",
-    label: "Успешных сделок",
-    description: "Продажа и аренда объектов",
+    display: "Сделки",
+    label: "Недвижимость",
+    description: "Продажа и аренда объектов недвижимости",
   },
   {
     icon: Users,
-    value: 120,
-    suffix: "+",
-    label: "Довольных клиентов",
-    description: "Ежегодно обращаются повторно",
+    display: "Клиенты",
+    label: "Сопровождение",
+    description: "Индивидуальное сопровождение сделок",
   },
   {
     icon: Award,
-    value: 3,
-    suffix: " года",
+    display: "С 2023",
     label: "На рынке",
     description: "С 2023 года в недвижимости",
   },
   {
     icon: Clock,
-    value: 24,
-    suffix: "/7",
-    label: "Поддержка",
-    description: "На связи в любое время",
+    display: "Пн–Пт",
+    label: "Консультации",
+    description: "Связь в указанные рабочие часы",
   },
 ];
 
@@ -77,11 +73,7 @@ export function Stats() {
 
                   <div>
                     <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
-                      <AnimatedCounter
-                        value={stat.value}
-                        suffix={stat.suffix}
-                        duration={2000 + index * 300}
-                      />
+                      {stat.display}
                     </p>
                     <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-primary/60 mt-1">
                       {stat.label}
