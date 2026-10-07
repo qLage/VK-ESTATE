@@ -7,27 +7,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { submitLead } from "@/lib/leads";
 
-/** Softened program themes — no unsubstantiated reward amounts (B7). */
-const PROGRAM_THEMES = [
+const REWARDS = [
   {
     icon: Users,
-    label: "Рекомендация кандидата на работу",
-    value: "Обсудим условия",
+    label: "Порекомендуй кандидата на работу — получи от Вашей Крыши",
+    value: "15.000₽",
   },
   {
     icon: Home,
-    label: "Клиент на покупку",
-    value: "Обсудим условия",
+    label: "Клиент на покупку — вы можете с нами получить",
+    value: "до 50.000₽",
   },
   {
     icon: KeyRound,
-    label: "Клиент на продажу",
-    value: "Обсудим условия",
+    label: "Клиент на продажу — вы можете с нами получить",
+    value: "до 30.000₽",
   },
   {
     icon: Landmark,
-    label: "Клиент на ипотечное сопровождение",
-    value: "Обсудим условия",
+    label: "Клиент на одобрение ипотеки",
+    value: "5.000₽",
   },
 ];
 
@@ -150,7 +149,7 @@ export function ReferralModal() {
         {!showForm ? (
           <>
             <div className="space-y-2.5">
-              {PROGRAM_THEMES.map((item, index) => {
+              {REWARDS.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div
