@@ -1,8 +1,14 @@
-# Leads API — заявки с сайта для CRM-агента
+# Leads API — заявки с сайта для CRM
 
 Базовый URL: `https://vkrysha.ru/api/leads`
 
 Токен выдаётся отдельно (секрет `LEADS_API_TOKEN` на сервере). Во фронтенд он не попадает.
+
+После приёма заявки leads-api **пересылает** её в CRM:
+`POST https://vkrysha-crm.ru/api/public/site-leads` с заголовком `X-Site-Lead-Token`
+(`CRM_SITE_LEADS_TOKEN` в `/etc/vkrysha-leads.env`). Токен CRM во фронтенд не попадает.
+
+В CRM должен быть включён приём заявок («Принимать заявки»), иначе CRM ответит `403`.
 
 ## Создать заявку (сайт)
 

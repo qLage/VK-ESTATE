@@ -10,6 +10,10 @@ const HOST = process.env.LEADS_HOST || "127.0.0.1";
 const TOKEN = process.env.LEADS_API_TOKEN || "";
 const DATA_DIR = process.env.LEADS_DATA_DIR || path.join(__dirname, "data");
 const DATA_FILE = path.join(DATA_DIR, "leads.jsonl");
+/** CRM public site-leads intake (token never reaches the browser). */
+const CRM_SITE_LEADS_URL =
+  process.env.CRM_SITE_LEADS_URL || "https://vkrysha-crm.ru/api/public/site-leads";
+const CRM_SITE_LEADS_TOKEN = process.env.CRM_SITE_LEADS_TOKEN || "";
 
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 20;
@@ -80,6 +84,71 @@ async function ensureStore() {
 async function appendLead(lead) {
   await ensureStore();
   await appendFile(DATA_FILE, `${JSON.stringify(lead)}\n`, "utf8");
+}
+
+/** Map stored lead → CRM site-leads body (CONTACT shape; referral without third-party PD). */
+function toCrmSiteLeadPayload(lead) {
+  if (lead.type === "referral") {
+    const interest = lead.interest || "other";
+    const messenger = lead.messenger || "";
+    return {
+      type: "contact",
+      name: lead.referrerName || lead.name,
+      phone: lead.referrerPhone || lead.phone,
+      message: [
+        "Реферальная заявка с сайта",
+        interest ? `тема: ${interest}` : null,
+        messenger ? `мессенджер: ${messenger}` : null,
+      ]
+        .filter(Boolean)
+        .join(". "),
+      page: lead.page || "/",
+    };
+  }
+  return {
+    type: "contact",
+    name: lead.name,
+    phone: lead.phone,
+    message: lead.message || undefined,
+    page: lead.page || "/",
+  };
+}
+
+async function forwardLeadToCrm(lead) {
+  if (!CRM_SITE_LEADS_TOKEN) {
+    return { ok: false, skipped: true, error: "crm_token_not_configured" };
+  }
+  const payload = toCrmSiteLeadPayload(lead);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8_000);
+  try {
+    const response = await fetch(CRM_SITE_LEADS_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Site-Lead-Token": CRM_SITE_LEADS_TOKEN,
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+    const text = await response.text();
+    let body = null;
+    try {
+      body = text ? JSON.parse(text) : null;
+    } catch {
+      body = { raw: text.slice(0, 300) };
+    }
+    if (!response.ok) {
+      console.error("crm_site_leads_forward_failed", response.status, body);
+      return { ok: false, status: response.status, body };
+    }
+    return { ok: true, status: response.status, body };
+  } catch (err) {
+    console.error("crm_site_leads_forward_error", err);
+    return { ok: false, error: err && err.message ? err.message : "forward_error" };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function listLeads(sinceIso) {
@@ -206,7 +275,19 @@ async function handlePost(req, res) {
   built.lead.consentAcceptedAt = new Date().toISOString();
 
   await appendLead(built.lead);
-  return json(res, 201, { ok: true, lead: built.lead });
+  const crm = await forwardLeadToCrm(built.lead);
+  built.lead.crmForwarded = Boolean(crm.ok);
+  if (crm.ok && crm.body && crm.body.id) {
+    built.lead.crmLeadId = crm.body.id;
+  }
+  // Local store is source of truth if CRM is down/disabled; still accept the lead.
+  return json(res, 201, {
+    ok: true,
+    lead: built.lead,
+    crm: crm.ok
+      ? { ok: true, id: crm.body && crm.body.id }
+      : { ok: false, status: crm.status, error: crm.error || crm.skipped || "crm_forward_failed" },
+  });
 }
 
 async function handleGet(req, res) {
@@ -254,5 +335,10 @@ server.listen(PORT, HOST, () => {
   console.log(`leads-api listening on http://${HOST}:${PORT}`);
   if (!TOKEN) {
     console.warn("LEADS_API_TOKEN is empty — GET /api/leads will reject all requests");
+  }
+  if (!CRM_SITE_LEADS_TOKEN) {
+    console.warn("CRM_SITE_LEADS_TOKEN is empty — leads will not be forwarded to CRM");
+  } else {
+    console.log(`CRM site-leads forward enabled → ${CRM_SITE_LEADS_URL}`);
   }
 });
