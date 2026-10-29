@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const SECTIONS = ["catalog", "gallery", "services", "team", "reviews", "contacts"];
+const SECTIONS = ["catalog", "services", "team", "reviews", "contacts"];
 
 function getSectionTop(el: HTMLElement): number {
   return el.getBoundingClientRect().top + window.scrollY;

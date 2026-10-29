@@ -8,7 +8,6 @@ import { displayName, primaryPhone, telHref } from "@/lib/site";
 
 const navLinks = [
   { label: "Каталог", to: "/catalog", section: "catalog" },
-  { label: "Галерея", to: "/#gallery", section: "gallery" },
   { label: "Услуги", to: "/#services", section: "services" },
   { label: "Отзывы", to: "/#reviews", section: "reviews" },
   { label: "Контакты", to: "/#contacts", section: "contacts" },

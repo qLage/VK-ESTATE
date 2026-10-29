@@ -2,7 +2,7 @@
 // Catalog goes through /api/site-catalog so the CRM token never reaches the browser:
 //   dev  — Vite proxy injects CRM_SITE_TOKEN
 //   prod — nginx must add the same token (see deploy/nginx-site-catalog.conf)
-// Gallery and employees still use the public CRM endpoints via /api.
+// Employees still use the public CRM endpoints via /api.
 
 import { sanitizeMortgageAdClaims } from "@/lib/sanitizeMortgageAds";
 
@@ -171,22 +171,6 @@ export interface ApiEmployee {
   position_name: string | null;
 }
 
-export interface ApiGalleryAlbum {
-  id: string;
-  title: string;
-  slug: string;
-  description: string | null;
-  cover_url: string | null;
-  sort_order: number;
-}
-
-export interface ApiGalleryPhoto {
-  id: string;
-  file_url: string;
-  caption: string | null;
-  sort_order: number;
-}
-
 export interface ApiResponse<T> {
   data: T;
   total?: number;
@@ -235,18 +219,6 @@ class SiteAPIClient {
       `/employees/public?limit=${limit}`,
     );
     return Array.isArray(res) ? res : res.data || [];
-  }
-
-  async getGalleryAlbums(): Promise<ApiGalleryAlbum[]> {
-    const res = await this.request<ApiResponse<ApiGalleryAlbum[]>>("/gallery/albums/public");
-    return res.data || [];
-  }
-
-  async getAlbumPhotos(slug: string): Promise<{ album: ApiGalleryAlbum; photos: ApiGalleryPhoto[] }> {
-    const res = await this.request<ApiResponse<{ album: ApiGalleryAlbum; photos: ApiGalleryPhoto[] }>>(
-      `/gallery/albums/${slug}/photos`,
-    );
-    return res.data || { album: {} as ApiGalleryAlbum, photos: [] };
   }
 
   async getSiteProfile(): Promise<unknown> {
